@@ -28,3 +28,31 @@
     padding: 2rem;
     align-items: start;
 }
+
+.cv-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.cv-form section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.cv-form section div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.cv-form label {
+    font-weight: 600;
+}
+
+.cv-form input,
+.cv-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+}
