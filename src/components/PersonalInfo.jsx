@@ -13,6 +13,15 @@ export default function PersonalInfo() {
             </div>
 
             <div>
+                <label htmlFor="title">Title</label>
+                <input
+                    type="text"
+                    id="title"
+                    name="title"
+                />
+            </div>
+
+            <div>
                 <label htmlFor="email">Email</label>
                 <input
                     type="email"
@@ -55,6 +64,15 @@ export default function PersonalInfo() {
                     id="website"
                     name="website"
                 />
+            </div>
+
+            <div>
+                <label htmlFor="about">About</label>
+                <textarea
+                    id="about"
+                    name="about"
+                    rows="4"
+                ></textarea>
             </div>
 
             <div>
