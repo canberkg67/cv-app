@@ -2,6 +2,7 @@ import Education from "./Education";
 import PersonalInfo from "./PersonalInfo";
 import Experience from "./Experience";
 import Skills from "./Skills";
+import Languages from "./Languages";
 
 export default function Form() {
     return (
@@ -10,6 +11,7 @@ export default function Form() {
             <Education />
             <Experience />
             <Skills />
+            <Languages />
         </section>
     );
 }
