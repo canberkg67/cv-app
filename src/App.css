@@ -19,3 +19,12 @@
 .header-content p {
     margin: 0;
 }
+
+/* To show Form and Preview side by side */
+.cv-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 2rem;
+    align-items: start;
+}
