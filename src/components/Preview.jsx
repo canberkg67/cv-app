@@ -4,7 +4,7 @@ export default function Preview() {
             <h2>Live Preview</h2>
 
             {/* Static content for now */}
-            <div className="cv-page">
+            <div className="cv-page" lang="en">
                 <header className="cv-header">
                     <h1>John Doe</h1>
                     <h2>Architect</h2>
