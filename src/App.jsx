@@ -35,13 +35,27 @@ export default function App() {
     jobEndDate: '',
     jobDescription: ''
   })
-  
+
   const [skills, setSkills] = useState('')
-  
+
   const [projects, setProjects] = useState({
     projectName: '',
     projectLink: '',
     projectDescription: ''
+  })
+
+  const [certificates, setCertificates] = useState({
+    certificateName: '',
+    issuingOrganization: '',
+    certificateDate: '',
+    certificateLink: ''
+  })
+
+  const [exams, setExams] = useState({
+    examName: '',
+    examScore: '',
+    examDate: '',
+    examDetails: ''
   })
 
   function handlePersonalInfoChange(event) {
@@ -80,6 +94,22 @@ export default function App() {
     }));
   }
 
+  function handleCertificatesChange(event) {
+    const { name, value } = event.target;
+    setCertificates(prevCertificates => ({
+      ...prevCertificates,
+      [name]: value
+    }));
+  }
+
+  function handleExamsChange(event) {
+    const { name, value } = event.target;
+    setExams(prevExams => ({
+      ...prevExams,
+      [name]: value
+    }));
+  }
+
   return (
     <>
       <Header />
@@ -95,6 +125,10 @@ export default function App() {
           onSkillsChange={handleSkillsChange}
           projects={projects}
           onProjectsChange={handleProjectsChange}
+          certificates={certificates}
+          onCertificatesChange={handleCertificatesChange}
+          exams={exams}
+          onExamsChange={handleExamsChange}
         />
         <Preview
           personalInfo={personalInfo}
@@ -102,6 +136,8 @@ export default function App() {
           experience={experience}
           skills={skills}
           projects={projects}
+          certificates={certificates}
+          exams={exams}
         />
       </main>
     </>

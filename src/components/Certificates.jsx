@@ -1,4 +1,4 @@
-export default function Certificates() {
+export default function Certificates({ certificates, onCertificatesChange }) {
     return (
         <section className="form-certificates">
             <h2>Certificates</h2>
@@ -8,6 +8,8 @@ export default function Certificates() {
                     type="text"
                     id="certificateName"
                     name="certificateName"
+                    value={certificates.certificateName}
+                    onChange={onCertificatesChange}
                 />
             </div>
 
@@ -19,6 +21,8 @@ export default function Certificates() {
                     type="text"
                     id="issuingOrganization"
                     name="issuingOrganization"
+                    value={certificates.issuingOrganization}
+                    onChange={onCertificatesChange}
                 />
             </div>
 
@@ -28,6 +32,8 @@ export default function Certificates() {
                     type="month"
                     id="certificateDate"
                     name="certificateDate"
+                    value={certificates.certificateDate}
+                    onChange={onCertificatesChange}
                 />
             </div>
 
@@ -37,6 +43,8 @@ export default function Certificates() {
                     type="url"
                     id="certificateLink"
                     name="certificateLink"
+                    value={certificates.certificateLink}
+                    onChange={onCertificatesChange}
                 />
             </div>
         </section>

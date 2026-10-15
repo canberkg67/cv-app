@@ -3,7 +3,9 @@ export default function Preview({
     education,
     experience,
     skills,
-    projects
+    projects,
+    certificates,
+    exams
 }) {
     const skillList = skills
         .split("\n")
@@ -105,8 +107,28 @@ export default function Preview({
                 <section className="cv-section">
                     <h3>Certificates</h3>
                     <div>
-                        <h4>Building Information Modeling</h4>
-                        <p>Example Design Academy | 2023</p>
+                        <h4>{certificates.certificateName || "Building Information Modeling"}</h4>
+                        <p>
+                            {certificates.issuingOrganization || "Example Design Academy"}
+                            {" | "}
+                            {certificates.certificateDate || "2023"}
+                        </p>
+                        {certificates.certificateLink && (
+                            <p>{certificates.certificateLink}</p>
+                        )}
+                    </div>
+                </section>
+
+                <section className="cv-section">
+                    <h3>Exams</h3>
+                    <div>
+                        <h4>{exams.examName || "IELTS"}</h4>
+                        <p>
+                            {exams.examScore || "8.0"}
+                            {" | "}
+                            {exams.examDate || "2024"}
+                        </p>
+                        <p>{exams.examDetails || "Overall band score"}</p>
                     </div>
                 </section>
 

@@ -1,4 +1,4 @@
-export default function Exams() {
+export default function Exams({ exams, onExamsChange }) {
     return (
         <section className="cv-exams">
             <h2>Exams</h2>
@@ -10,6 +10,8 @@ export default function Exams() {
                     id="examName"
                     name="examName"
                     placeholder="e.g. IELTS, TOEFL"
+                    value={exams.examName}
+                    onChange={onExamsChange}
                 />
             </div>
 
@@ -19,6 +21,8 @@ export default function Exams() {
                     type="text"
                     id="examScore"
                     name="examScore"
+                    value={exams.examScore}
+                    onChange={onExamsChange}
                 />
             </div>
 
@@ -28,6 +32,8 @@ export default function Exams() {
                     type="month"
                     id="examDate"
                     name="examDate"
+                    value={exams.examDate}
+                    onChange={onExamsChange}
                 />
             </div>
 
@@ -38,6 +44,8 @@ export default function Exams() {
                     name="examDetails"
                     rows="3"
                     placeholder="You can add any additional details about the exam here."
+                    value={exams.examDetails}
+                    onChange={onExamsChange}
                 />
             </div>
         </section>
