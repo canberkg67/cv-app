@@ -5,11 +5,17 @@ export default function Preview({
     skills,
     projects,
     certificates,
-    exams
+    exams,
+    language,
+    other
 }) {
     const skillList = skills
         .split("\n")
         .map((skill) => skill.trim())
+        .filter(Boolean);
+    const otherList = other
+        .split("\n")
+        .map((item) => item.trim())
         .filter(Boolean);
 
     return (
@@ -134,16 +140,28 @@ export default function Preview({
 
                 <section className="cv-section">
                     <h3>Languages</h3>
-                    <p>English — Native</p>
-                    <p>Spanish — B1 Intermediate</p>
+                    <p>
+                        {language.language || "English"}
+                        {" — "}
+                        {language.languageLevel || "Native"}
+                    </p>
                 </section>
 
                 <section className="cv-section">
                     <h3>Other Information</h3>
-                    <p>
-                        Architectural photography, urban sketching,
-                        volunteering, and sustainable design research.
-                    </p>
+                    <ul>
+                        {(otherList.length > 0
+                            ? otherList
+                            : [
+                                "Architectural photography",
+                                "Urban sketching",
+                                "Volunteering",
+                                "Sustainable design research",
+                            ]
+                        ).map((item, index) => (
+                            <li key={`${item}-${index}`}>{item}</li>
+                        ))}
+                    </ul>
                 </section>
             </div>
         </section>

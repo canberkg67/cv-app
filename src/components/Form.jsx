@@ -22,7 +22,11 @@ export default function Form({
     certificates,
     onCertificatesChange,
     exams,
-    onExamsChange
+    onExamsChange,
+    language,
+    onLanguageChange,
+    other,
+    onOtherChange
 }) {
     return (
         <section className="cv-form">
@@ -54,8 +58,14 @@ export default function Form({
             exams={exams}
             onExamsChange={onExamsChange}
             />
-            <Languages />
-            <Other />
+            <Languages
+            language={language}
+            onLanguageChange={onLanguageChange}
+            />
+            <Other
+            other={other}
+            onOtherChange={onOtherChange}
+            />
         </section>
     );
 }

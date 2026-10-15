@@ -1,4 +1,4 @@
-export default function Languages() {
+export default function Languages({ language, onLanguageChange }) {
     return (
         <section className="form-languages">
             <h2>Languages</h2>
@@ -8,6 +8,8 @@ export default function Languages() {
                     type="text"
                     id="language"
                     name="language"
+                    value={language.language}
+                    onChange={onLanguageChange}
                 />
             </div>
 
@@ -16,7 +18,8 @@ export default function Languages() {
                 <select
                     id="languageLevel"
                     name="languageLevel"
-                    defaultValue=""
+                    value={language.languageLevel}
+                    onChange={onLanguageChange}
                 >
                     <option value="" disabled>
                         Select a level

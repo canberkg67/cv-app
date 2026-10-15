@@ -58,6 +58,13 @@ export default function App() {
     examDetails: ''
   })
 
+  const [language, setLanguage] = useState({
+    language: '',
+    languageLevel: ''
+  })
+
+  const [other, setOther] = useState('')
+
   function handlePersonalInfoChange(event) {
     const { name, value } = event.target;
     setPersonalInfo(prevInfo => ({
@@ -110,6 +117,18 @@ export default function App() {
     }));
   }
 
+  function handleLanguageChange(event) {
+    const { name, value } = event.target;
+    setLanguage(prevLanguage => ({
+      ...prevLanguage,
+      [name]: value
+    }));
+  }
+
+  function handleOtherChange(event) {
+    setOther(event.target.value);
+  }
+
   return (
     <>
       <Header />
@@ -129,6 +148,10 @@ export default function App() {
           onCertificatesChange={handleCertificatesChange}
           exams={exams}
           onExamsChange={handleExamsChange}
+          language={language}
+          onLanguageChange={handleLanguageChange}
+          other={other}
+          onOtherChange={handleOtherChange}
         />
         <Preview
           personalInfo={personalInfo}
@@ -138,6 +161,8 @@ export default function App() {
           projects={projects}
           certificates={certificates}
           exams={exams}
+          language={language}
+          other={other}
         />
       </main>
     </>
