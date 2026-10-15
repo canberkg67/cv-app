@@ -1,4 +1,4 @@
-export default function Preview() {
+export default function Preview( { personalInfo }) {
     return (
         <section className="cv-preview">
             <h2>Live Preview</h2>
@@ -6,21 +6,21 @@ export default function Preview() {
             {/* Static content for now */}
             <div className="cv-page" lang="en">
                 <header className="cv-header">
-                    <h1>John Doe</h1>
-                    <h2>Architect</h2>
+                    <h1>{personalInfo.fullName || "John Doe"}</h1>
+                    <h2>{personalInfo.title || "Architect"}</h2>
 
-                    <p>john.doe@example.com | +1 555 010 2040</p>
-                    <p>Portland, Oregon | portfolio.example.com</p>
+                    <p>{personalInfo.email || "john.doe@example.com"}</p>
+                    <p>{personalInfo.phone || "+1 555 010 2040"}</p>
+                    <p>{personalInfo.location || "Portland, Oregon"}</p>
+                    <p>{personalInfo.linkedin || "linkedin.com/in/examplejohndoe"}</p>
+                    <p>{personalInfo.website || "portfolio.example.com"}</p>
+                    
                 </header>
 
                 <section className="cv-section">
                     <h3>About</h3>
                     <p>
-                        Creative and detail-oriented architect with an
-                        interest in sustainable design, urban spaces,
-                        and functional architecture. Experienced in
-                        developing design concepts and preparing
-                        architectural drawings.
+                        {personalInfo.about || "Creative and detail-oriented architect with an interest in sustainable design, urban spaces, and functional architecture. Experienced in developing design concepts and preparing architectural drawings."}
                     </p>
                 </section>
 

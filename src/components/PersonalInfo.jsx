@@ -1,4 +1,4 @@
-export default function PersonalInfo() {
+export default function PersonalInfo({ personalInfo, onPersonalInfoChange }) {
     return (
         <section className="personal-info">
             <h2>Personal Information</h2>
@@ -9,6 +9,8 @@ export default function PersonalInfo() {
                     type="text"
                     id="fullName"
                     name="fullName"
+                    value={personalInfo.fullName}
+                    onChange={onPersonalInfoChange}
                 />
             </div>
 
@@ -18,6 +20,8 @@ export default function PersonalInfo() {
                     type="text"
                     id="title"
                     name="title"
+                    value={personalInfo.title}
+                    onChange={onPersonalInfoChange}
                 />
             </div>
 
@@ -27,6 +31,8 @@ export default function PersonalInfo() {
                     type="email"
                     id="email"
                     name="email"
+                    value={personalInfo.email}
+                    onChange={onPersonalInfoChange}
                 />
             </div>
 
@@ -36,6 +42,8 @@ export default function PersonalInfo() {
                     type="tel"
                     id="phone"
                     name="phone"
+                    value={personalInfo.phone}
+                    onChange={onPersonalInfoChange}
                 />
             </div>
 
@@ -45,6 +53,8 @@ export default function PersonalInfo() {
                     type="text"
                     id="location"
                     name="location"
+                    value={personalInfo.location}
+                    onChange={onPersonalInfoChange}
                 />
             </div>
 
@@ -54,6 +64,8 @@ export default function PersonalInfo() {
                     type="url"
                     id="linkedin"
                     name="linkedin"
+                    value={personalInfo.linkedin}
+                    onChange={onPersonalInfoChange}
                 />
             </div>
 
@@ -63,6 +75,8 @@ export default function PersonalInfo() {
                     type="url"
                     id="website"
                     name="website"
+                    value={personalInfo.website}
+                    onChange={onPersonalInfoChange}
                 />
             </div>
 
@@ -72,6 +86,8 @@ export default function PersonalInfo() {
                     id="about"
                     name="about"
                     rows="4"
+                    value={personalInfo.about}
+                    onChange={onPersonalInfoChange}
                 ></textarea>
             </div>
 
@@ -82,6 +98,7 @@ export default function PersonalInfo() {
                     id="profilePhoto"
                     name="profilePhoto"
                     accept="image/*"
+                    onChange={onPersonalInfoChange}
                 />
             </div>
         </section>

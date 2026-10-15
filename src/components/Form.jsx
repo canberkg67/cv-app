@@ -8,10 +8,13 @@ import Exams from "./Exams";
 import Languages from "./Languages";
 import Other from "./Other";
 
-export default function Form() {
+export default function Form({ personalInfo, onPersonalInfoChange }) {
     return (
         <section className="cv-form">
-            <PersonalInfo />
+            <PersonalInfo 
+            personalInfo={personalInfo}
+            onPersonalInfoChange={onPersonalInfoChange}
+            />
             <Education />
             <Experience />
             <Skills />
