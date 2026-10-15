@@ -2,6 +2,7 @@ import './App.css'
 import { useState } from 'react'
 import Header from './components/Header'
 import Form from './components/Form'
+import Footer from './components/Footer'
 import Preview from './components/Preview'
 
 function createEmptyEducation(id) {
@@ -279,6 +280,7 @@ export default function App() {
           other={other}
         />
       </main>
+      <Footer />
     </>
   )
 }
