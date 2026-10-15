@@ -26,7 +26,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 2rem;
+    padding: 0.2rem 2rem;
     background-color: var(--surface);
     border-bottom: 1px solid var(--border-color);
 }
@@ -34,17 +34,19 @@ body {
 .header-content {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
 }
 
 .header-content h1{
     color: var(--text-primary);
-    font-size: 1.65rem;
+    font-size: 1.9rem;
 }
 .header-content p {
     color: var(--text-secondary);
-    line-height: 1.5;
-    font-size: 0.9rem;
+    line-height: 1;
+    font-size: 1.1rem;
+    font-style:italic;
+    font-weight: bold;
+    margin-top: 0.2rem;
 }
 
 /* To show Form and Preview side by side */
