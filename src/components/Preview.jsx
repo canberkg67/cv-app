@@ -1,4 +1,4 @@
-export default function Preview({ personalInfo, education }) {
+export default function Preview({ personalInfo, education, experience }) {
     return (
         <section className="cv-preview">
             <h2>Live Preview</h2>
@@ -44,20 +44,17 @@ export default function Preview({ personalInfo, education }) {
                 <section className="cv-section">
                     <h3>Experience</h3>
                     <div>
-                        <h4>Junior Architect</h4>
-                        <p>Example Architecture Studio | 2024 – Present</p>
+                        <h4>{experience.position || "Junior Architect"}</h4>
                         <p>
-                            Developed architectural concepts, prepared
-                            technical drawings, and collaborated with
-                            senior architects on residential projects.
+                            {experience.company || "Example Architecture Studio"}
+                            {" | "}
+                            {experience.jobStartDate || "2024"} –{" "}
+                            {experience.jobEndDate || "Present"}
                         </p>
-                    </div>
-                    <div>
-                        <h4>Architecture Intern</h4>
-                        <p>Example Design Office | Summer 2021</p>
+                        {experience.jobLocation && <p>{experience.jobLocation}</p>}
                         <p>
-                            Assisted with 3D modeling, site analysis,
-                            and presentation materials for design reviews.
+                            {experience.jobDescription ||
+                                "Developed architectural concepts, prepared technical drawings, and collaborated with senior architects on residential projects."}
                         </p>
                     </div>
                 </section>

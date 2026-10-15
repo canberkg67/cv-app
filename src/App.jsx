@@ -25,6 +25,14 @@ export default function App() {
     schoolEndDate: '',
     schoolDescription: ''
   })
+  const [experience, setExperience] = useState({
+    company: '',
+    position: '',
+    jobLocation: '',
+    jobStartDate: '',
+    jobEndDate: '',
+    jobDescription: ''
+  })
 
   function handlePersonalInfoChange(event) {
     const { name, value } = event.target;
@@ -42,6 +50,14 @@ export default function App() {
     }));
   }
 
+  function handleExperienceChange(event) {
+    const { name, value } = event.target;
+    setExperience(prevExperience => ({
+      ...prevExperience,
+      [name]: value
+    }));
+  }
+
   return (
     <>
       <Header />
@@ -51,8 +67,14 @@ export default function App() {
           onPersonalInfoChange={handlePersonalInfoChange}
           education={education}
           onEducationChange={handleEducationChange}
+          experience={experience}
+          onExperienceChange={handleExperienceChange}
         />
-        <Preview personalInfo={personalInfo} education={education} />
+        <Preview
+          personalInfo={personalInfo}
+          education={education}
+          experience={experience}
+        />
       </main>
     </>
   )
