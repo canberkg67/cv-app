@@ -4,6 +4,19 @@ import Header from './components/Header'
 import Form from './components/Form'
 import Preview from './components/Preview'
 
+function createEmptyEducation(id) {
+  return {
+    id,
+    school: '',
+    degree: '',
+    fieldOfStudy: '',
+    schoolLocation: '',
+    schoolStartDate: '',
+    schoolEndDate: '',
+    schoolDescription: ''
+  }
+}
+
 export default function App() {
   const [personalInfo, setPersonalInfo] = useState({
     fullName: '',
@@ -17,15 +30,7 @@ export default function App() {
     profilePhoto: null
 })
   
-  const [education, setEducation] = useState({
-    school: '',
-    degree: '',
-    fieldOfStudy: '',
-    schoolLocation: '',
-    schoolStartDate: '',
-    schoolEndDate: '',
-    schoolDescription: ''
-  })
+  const [education, setEducation] = useState([createEmptyEducation(1)])
   
   const [experience, setExperience] = useState({
     company: '',
@@ -73,12 +78,24 @@ export default function App() {
     }));
   }
 
-  function handleEducationChange(event) {
+  function handleEducationChange(id, event) {
     const { name, value } = event.target;
-    setEducation(prevEducation => ({
-      ...prevEducation,
-      [name]: value
-    }));
+    setEducation(prevEducation => prevEducation.map(entry =>
+      entry.id === id ? { ...entry, [name]: value } : entry
+    ));
+  }
+
+  function handleAddEducation() {
+    setEducation(prevEducation => {
+      const nextId = Math.max(0, ...prevEducation.map(entry => entry.id)) + 1;
+      return [...prevEducation, createEmptyEducation(nextId)];
+    });
+  }
+
+  function handleRemoveEducation(id) {
+    setEducation(prevEducation =>
+      prevEducation.filter(entry => entry.id !== id)
+    );
   }
 
   function handleExperienceChange(event) {
@@ -138,6 +155,8 @@ export default function App() {
           onPersonalInfoChange={handlePersonalInfoChange}
           education={education}
           onEducationChange={handleEducationChange}
+          onAddEducation={handleAddEducation}
+          onRemoveEducation={handleRemoveEducation}
           experience={experience}
           onExperienceChange={handleExperienceChange}
           skills={skills}

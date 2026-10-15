@@ -9,14 +9,27 @@ export default function Preview({
     language,
     other
 }) {
+    
     const skillList = skills
         .split("\n")
         .map((skill) => skill.trim())
         .filter(Boolean);
+    
     const otherList = other
         .split("\n")
         .map((item) => item.trim())
         .filter(Boolean);
+    
+    const filledEducation = education
+        .map((entry, index) => ({ entry, index }))
+        .filter(({ entry }) =>
+            Object.entries(entry).some(([key, value]) => key !== "id" && value)
+        )
+        .sort(({ entry: first }, { entry: second }) => {
+            if (!first.schoolEndDate) return second.schoolEndDate ? 1 : 0;
+            if (!second.schoolEndDate) return -1;
+            return second.schoolEndDate.localeCompare(first.schoolEndDate);
+        });
 
     return (
         <section className="cv-preview">
@@ -45,19 +58,31 @@ export default function Preview({
 
                 <section className="cv-section">
                     <h3>Education</h3>
-                    <div>
-                        <h4>{education.school || "Example University"}</h4>
-                        <p>{education.degree || "Master of Architecture"}</p>
-                        {education.fieldOfStudy && <p>{education.fieldOfStudy}</p>}
-                        {education.schoolLocation && <p>{education.schoolLocation}</p>}
-                        <p>
-                            {education.schoolStartDate || "2022"} –{" "}
-                            {education.schoolEndDate || "2024"}
-                        </p>
-                        {education.schoolDescription && (
-                            <p>{education.schoolDescription}</p>
-                        )}
-                    </div>
+                    {filledEducation.length > 0 ? (
+                        filledEducation.map(({ entry }) => (
+                            <div key={entry.id}>
+                                <h4>{entry.school}</h4>
+                                {entry.degree && <p>{entry.degree}</p>}
+                                {entry.fieldOfStudy && <p>{entry.fieldOfStudy}</p>}
+                                {entry.schoolLocation && <p>{entry.schoolLocation}</p>}
+                                {(entry.schoolStartDate || entry.schoolEndDate) && (
+                                    <p>
+                                        {entry.schoolStartDate || "Start date not set"} –{" "}
+                                        {entry.schoolEndDate || "Present"}
+                                    </p>
+                                )}
+                                {entry.schoolDescription && (
+                                    <p>{entry.schoolDescription}</p>
+                                )}
+                            </div>
+                        ))
+                    ) : (
+                        <div>
+                            <h4>Example University</h4>
+                            <p>Master of Architecture</p>
+                            <p>2022 – 2024</p>
+                        </div>
+                    )}
                 </section>
 
                 <section className="cv-section">

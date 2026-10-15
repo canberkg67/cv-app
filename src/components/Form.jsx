@@ -13,6 +13,8 @@ export default function Form({
     onPersonalInfoChange,
     education,
     onEducationChange,
+    onAddEducation,
+    onRemoveEducation,
     experience,
     onExperienceChange,
     skills,
@@ -37,6 +39,8 @@ export default function Form({
             <Education
             education={education}
             onEducationChange={onEducationChange}
+            onAddEducation={onAddEducation}
+            onRemoveEducation={onRemoveEducation}
             />
             <Experience
             experience={experience}
