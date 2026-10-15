@@ -1,4 +1,4 @@
-export default function Education() {
+export default function Education({ education, onEducationChange }) {
     return (
         <section className="education">
             <h2>Education</h2>
@@ -8,6 +8,8 @@ export default function Education() {
                     type="text"
                     id="school"
                     name="school"
+                    value={education.school}
+                    onChange={onEducationChange}
                 />
             </div>
 
@@ -17,6 +19,8 @@ export default function Education() {
                     type="text"
                     id="degree"
                     name="degree"
+                    value={education.degree}
+                    onChange={onEducationChange}
                 />
             </div>
 
@@ -26,6 +30,8 @@ export default function Education() {
                     type="text"
                     id="fieldOfStudy"
                     name="fieldOfStudy"
+                    value={education.fieldOfStudy}
+                    onChange={onEducationChange}
                 />
             </div>
 
@@ -35,6 +41,8 @@ export default function Education() {
                     type="text"
                     id="schoolLocation"
                     name="schoolLocation"
+                    value={education.schoolLocation}
+                    onChange={onEducationChange}
                 />
             </div>
 
@@ -44,6 +52,8 @@ export default function Education() {
                     type="month"
                     id="schoolStartDate"
                     name="schoolStartDate"
+                    value={education.schoolStartDate}
+                    onChange={onEducationChange}
                 />
             </div>
 
@@ -53,6 +63,8 @@ export default function Education() {
                     type="month"
                     id="schoolEndDate"
                     name="schoolEndDate"
+                    value={education.schoolEndDate}
+                    onChange={onEducationChange}
                 />
             </div>
 
@@ -62,6 +74,8 @@ export default function Education() {
                     id="schoolDescription"
                     name="schoolDescription"
                     rows="4"
+                    value={education.schoolDescription}
+                    onChange={onEducationChange}
                 />
             </div>
         </section>

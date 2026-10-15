@@ -16,11 +16,28 @@ export default function App() {
     about: '',
     profilePhoto: null
 })
+  const [education, setEducation] = useState({
+    school: '',
+    degree: '',
+    fieldOfStudy: '',
+    schoolLocation: '',
+    schoolStartDate: '',
+    schoolEndDate: '',
+    schoolDescription: ''
+  })
 
   function handlePersonalInfoChange(event) {
     const { name, value } = event.target;
     setPersonalInfo(prevInfo => ({
       ...prevInfo,
+      [name]: value
+    }));
+  }
+
+  function handleEducationChange(event) {
+    const { name, value } = event.target;
+    setEducation(prevEducation => ({
+      ...prevEducation,
       [name]: value
     }));
   }
@@ -32,8 +49,10 @@ export default function App() {
         <Form 
           personalInfo={personalInfo}
           onPersonalInfoChange={handlePersonalInfoChange}
+          education={education}
+          onEducationChange={handleEducationChange}
         />
-        <Preview personalInfo={personalInfo} />
+        <Preview personalInfo={personalInfo} education={education} />
       </main>
     </>
   )

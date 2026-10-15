@@ -1,4 +1,4 @@
-export default function Preview( { personalInfo }) {
+export default function Preview({ personalInfo, education }) {
     return (
         <section className="cv-preview">
             <h2>Live Preview</h2>
@@ -27,14 +27,17 @@ export default function Preview( { personalInfo }) {
                 <section className="cv-section">
                     <h3>Education</h3>
                     <div>
-                        <h4>Example University</h4>
-                        <p>Master of Architecture</p>
-                        <p>2022 – 2024</p>
-                    </div>
-                    <div>
-                        <h4>Example Institute of Design</h4>
-                        <p>Bachelor of Architecture</p>
-                        <p>2018 – 2022</p>
+                        <h4>{education.school || "Example University"}</h4>
+                        <p>{education.degree || "Master of Architecture"}</p>
+                        {education.fieldOfStudy && <p>{education.fieldOfStudy}</p>}
+                        {education.schoolLocation && <p>{education.schoolLocation}</p>}
+                        <p>
+                            {education.schoolStartDate || "2022"} –{" "}
+                            {education.schoolEndDate || "2024"}
+                        </p>
+                        {education.schoolDescription && (
+                            <p>{education.schoolDescription}</p>
+                        )}
                     </div>
                 </section>
 
