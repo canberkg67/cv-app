@@ -62,6 +62,7 @@ export default function Preview({
                 <header className="cv-header">
                     {personalInfo.profilePhoto && (
                         <img
+                            className="cv-profile-photo"
                             src={personalInfo.profilePhoto}
                             alt="Profile"
                         />
