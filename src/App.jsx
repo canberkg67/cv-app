@@ -29,6 +29,15 @@ function createEmptyExperience(id) {
   }
 }
 
+function createEmptyProject(id) {
+  return {
+    id,
+    projectName: '',
+    projectLink: '',
+    projectDescription: ''
+  }
+}
+
 export default function App() {
   const [personalInfo, setPersonalInfo] = useState({
     fullName: '',
@@ -48,11 +57,7 @@ export default function App() {
 
   const [skills, setSkills] = useState('')
 
-  const [projects, setProjects] = useState({
-    projectName: '',
-    projectLink: '',
-    projectDescription: ''
-  })
+  const [projects, setProjects] = useState([createEmptyProject(1)])
 
   const [certificates, setCertificates] = useState({
     certificateName: '',
@@ -127,12 +132,24 @@ export default function App() {
     setSkills(event.target.value);
   }
 
-  function handleProjectsChange(event) {
+  function handleProjectsChange(id, event) {
     const { name, value } = event.target;
-    setProjects(prevProjects => ({
-      ...prevProjects,
-      [name]: value
-    }));
+    setProjects(prevProjects => prevProjects.map(entry =>
+      entry.id === id ? { ...entry, [name]: value } : entry
+    ));
+  }
+
+  function handleAddProject() {
+    setProjects(prevProjects => {
+      const nextId = Math.max(0, ...prevProjects.map(entry => entry.id)) + 1;
+      return [...prevProjects, createEmptyProject(nextId)];
+    });
+  }
+
+  function handleRemoveProject(id) {
+    setProjects(prevProjects =>
+      prevProjects.filter(entry => entry.id !== id)
+    );
   }
 
   function handleCertificatesChange(event) {
@@ -182,6 +199,8 @@ export default function App() {
           onSkillsChange={handleSkillsChange}
           projects={projects}
           onProjectsChange={handleProjectsChange}
+          onAddProject={handleAddProject}
+          onRemoveProject={handleRemoveProject}
           certificates={certificates}
           onCertificatesChange={handleCertificatesChange}
           exams={exams}

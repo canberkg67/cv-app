@@ -40,6 +40,9 @@ export default function Preview({
             if (!second.jobEndDate) return 1;
             return second.jobEndDate.localeCompare(first.jobEndDate);
         });
+    const filledProjects = projects.filter(entry =>
+        entry.projectName || entry.projectLink || entry.projectDescription
+    );
 
     return (
         <section className="cv-preview">
@@ -147,14 +150,24 @@ export default function Preview({
 
                 <section className="cv-section">
                     <h3>Projects</h3>
-                    <div>
-                        <h4>{projects.projectName || "Sustainable Community Center"}</h4>
-                        {projects.projectLink && <p>{projects.projectLink}</p>}
-                        <p>
-                            {projects.projectDescription ||
-                                "Developed a conceptual design for a community center focused on natural lighting, energy efficiency, and public accessibility."}
-                        </p>
-                    </div>
+                    {filledProjects.length > 0 ? (
+                        filledProjects.map(entry => (
+                            <div key={entry.id}>
+                                {entry.projectName && <h4>{entry.projectName}</h4>}
+                                {entry.projectLink && <p>{entry.projectLink}</p>}
+                                {entry.projectDescription && (
+                                    <p>{entry.projectDescription}</p>
+                                )}
+                            </div>
+                        ))
+                    ) : (
+                        <div>
+                            <h4>Sustainable Community Center</h4>
+                            <p>
+                                Developed a conceptual design for a community center focused on natural lighting, energy efficiency, and public accessibility.
+                            </p>
+                        </div>
+                    )}
                 </section>
 
                 <section className="cv-section">

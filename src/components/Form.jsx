@@ -23,6 +23,8 @@ export default function Form({
     onSkillsChange,
     projects,
     onProjectsChange,
+    onAddProject,
+    onRemoveProject,
     certificates,
     onCertificatesChange,
     exams,
@@ -57,6 +59,8 @@ export default function Form({
             <Projects
             projects={projects}
             onProjectsChange={onProjectsChange}
+            onAddProject={onAddProject}
+            onRemoveProject={onRemoveProject}
             />
             <Certificates
             certificates={certificates}
