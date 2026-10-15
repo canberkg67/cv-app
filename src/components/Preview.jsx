@@ -1,4 +1,10 @@
-export default function Preview({ personalInfo, education, experience, skills }) {
+export default function Preview({
+    personalInfo,
+    education,
+    experience,
+    skills,
+    projects
+}) {
     const skillList = skills
         .split("\n")
         .map((skill) => skill.trim())
@@ -85,26 +91,13 @@ export default function Preview({ personalInfo, education, experience, skills })
                 </section>
 
                 <section className="cv-section">
-                    <h3>Languages</h3>
-                    <p>English — Native</p>
-                    <p>Spanish — B1 Intermediate</p>
-                </section>
-
-                <section className="cv-section">
                     <h3>Projects</h3>
                     <div>
-                        <h4>Sustainable Community Center</h4>
+                        <h4>{projects.projectName || "Sustainable Community Center"}</h4>
+                        {projects.projectLink && <p>{projects.projectLink}</p>}
                         <p>
-                            Developed a conceptual design for a
-                            community center focused on natural lighting,
-                            energy efficiency, and public accessibility.
-                        </p>
-                    </div>
-                    <div>
-                        <h4>Urban Housing Study</h4>
-                        <p>
-                            Created site studies and preliminary 3D models
-                            exploring compact residential design.
+                            {projects.projectDescription ||
+                                "Developed a conceptual design for a community center focused on natural lighting, energy efficiency, and public accessibility."}
                         </p>
                     </div>
                 </section>
@@ -115,6 +108,12 @@ export default function Preview({ personalInfo, education, experience, skills })
                         <h4>Building Information Modeling</h4>
                         <p>Example Design Academy | 2023</p>
                     </div>
+                </section>
+
+                <section className="cv-section">
+                    <h3>Languages</h3>
+                    <p>English — Native</p>
+                    <p>Spanish — B1 Intermediate</p>
                 </section>
 
                 <section className="cv-section">

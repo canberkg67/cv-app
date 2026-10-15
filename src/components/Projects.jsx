@@ -1,4 +1,4 @@
-export default function Projects() {
+export default function Projects({ projects, onProjectsChange }) {
     return (
         <section className="form-projects">
             <h2>Projects</h2>
@@ -8,6 +8,8 @@ export default function Projects() {
                     type="text"
                     id="projectName"
                     name="projectName"
+                    value={projects.projectName}
+                    onChange={onProjectsChange}
                 />
             </div>
 
@@ -17,6 +19,8 @@ export default function Projects() {
                     type="url"
                     id="projectLink"
                     name="projectLink"
+                    value={projects.projectLink}
+                    onChange={onProjectsChange}
                 />
             </div>
 
@@ -28,6 +32,8 @@ export default function Projects() {
                     id="projectDescription"
                     name="projectDescription"
                     rows="4"
+                    value={projects.projectDescription}
+                    onChange={onProjectsChange}
                 />
             </div>
         </section>

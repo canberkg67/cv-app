@@ -16,7 +16,9 @@ export default function Form({
     experience,
     onExperienceChange,
     skills,
-    onSkillsChange
+    onSkillsChange,
+    projects,
+    onProjectsChange
 }) {
     return (
         <section className="cv-form">
@@ -36,7 +38,10 @@ export default function Form({
             skills={skills}
             onSkillsChange={onSkillsChange}
             />
-            <Projects />
+            <Projects
+            projects={projects}
+            onProjectsChange={onProjectsChange}
+            />
             <Certificates />
             <Exams />
             <Languages />

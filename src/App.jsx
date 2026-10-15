@@ -16,6 +16,7 @@ export default function App() {
     about: '',
     profilePhoto: null
 })
+  
   const [education, setEducation] = useState({
     school: '',
     degree: '',
@@ -25,6 +26,7 @@ export default function App() {
     schoolEndDate: '',
     schoolDescription: ''
   })
+  
   const [experience, setExperience] = useState({
     company: '',
     position: '',
@@ -33,7 +35,14 @@ export default function App() {
     jobEndDate: '',
     jobDescription: ''
   })
+  
   const [skills, setSkills] = useState('')
+  
+  const [projects, setProjects] = useState({
+    projectName: '',
+    projectLink: '',
+    projectDescription: ''
+  })
 
   function handlePersonalInfoChange(event) {
     const { name, value } = event.target;
@@ -63,6 +72,14 @@ export default function App() {
     setSkills(event.target.value);
   }
 
+  function handleProjectsChange(event) {
+    const { name, value } = event.target;
+    setProjects(prevProjects => ({
+      ...prevProjects,
+      [name]: value
+    }));
+  }
+
   return (
     <>
       <Header />
@@ -76,12 +93,15 @@ export default function App() {
           onExperienceChange={handleExperienceChange}
           skills={skills}
           onSkillsChange={handleSkillsChange}
+          projects={projects}
+          onProjectsChange={handleProjectsChange}
         />
         <Preview
           personalInfo={personalInfo}
           education={education}
           experience={experience}
           skills={skills}
+          projects={projects}
         />
       </main>
     </>
