@@ -1,4 +1,8 @@
-export default function PersonalInfo({ personalInfo, onPersonalInfoChange }) {
+export default function PersonalInfo({
+    personalInfo,
+    onPersonalInfoChange,
+    onProfilePhotoChange
+}) {
     return (
         <section className="personal-info">
             <h2>Personal Information</h2>
@@ -98,7 +102,7 @@ export default function PersonalInfo({ personalInfo, onPersonalInfoChange }) {
                     id="profilePhoto"
                     name="profilePhoto"
                     accept="image/*"
-                    onChange={onPersonalInfoChange}
+                    onChange={onProfilePhotoChange}
                 />
             </div>
         </section>

@@ -58,9 +58,14 @@ export default function Preview({
         <section className="cv-preview">
             <h2>Live Preview</h2>
 
-            {/* Static content for now */}
             <div className="cv-page" lang="en">
                 <header className="cv-header">
+                    {personalInfo.profilePhoto && (
+                        <img
+                            src={personalInfo.profilePhoto}
+                            alt="Profile"
+                        />
+                    )}
                     <h1>{personalInfo.fullName || "John Doe"}</h1>
                     <h2>{personalInfo.title || "Architect"}</h2>
 

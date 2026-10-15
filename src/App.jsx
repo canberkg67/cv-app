@@ -1,5 +1,5 @@
 import './App.css'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Header from './components/Header'
 import Form from './components/Form'
 import Footer from './components/Footer'
@@ -68,6 +68,7 @@ function createEmptyLanguage(id) {
 }
 
 export default function App() {
+  const profilePhotoUrl = useRef(null)
   const [personalInfo, setPersonalInfo] = useState({
     fullName: '',
     title: '',
@@ -79,6 +80,12 @@ export default function App() {
     about: '',
     profilePhoto: null
 })
+
+  useEffect(() => () => {
+    if (profilePhotoUrl.current) {
+      URL.revokeObjectURL(profilePhotoUrl.current)
+    }
+  }, [])
   
   const [education, setEducation] = useState([createEmptyEducation(1)])
   
@@ -101,6 +108,22 @@ export default function App() {
     setPersonalInfo(prevInfo => ({
       ...prevInfo,
       [name]: value
+    }));
+  }
+
+  function handleProfilePhotoChange(event) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const nextPhotoUrl = URL.createObjectURL(file);
+    if (profilePhotoUrl.current) {
+      URL.revokeObjectURL(profilePhotoUrl.current);
+    }
+    profilePhotoUrl.current = nextPhotoUrl;
+
+    setPersonalInfo(prevInfo => ({
+      ...prevInfo,
+      profilePhoto: nextPhotoUrl
     }));
   }
 
@@ -239,6 +262,7 @@ export default function App() {
         <Form 
           personalInfo={personalInfo}
           onPersonalInfoChange={handlePersonalInfoChange}
+          onProfilePhotoChange={handleProfilePhotoChange}
           education={education}
           onEducationChange={handleEducationChange}
           onAddEducation={handleAddEducation}

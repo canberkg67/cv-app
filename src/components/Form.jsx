@@ -11,6 +11,7 @@ import Other from "./Other";
 export default function Form({
     personalInfo,
     onPersonalInfoChange,
+    onProfilePhotoChange,
     education,
     onEducationChange,
     onAddEducation,
@@ -45,6 +46,7 @@ export default function Form({
             <PersonalInfo 
             personalInfo={personalInfo}
             onPersonalInfoChange={onPersonalInfoChange}
+            onProfilePhotoChange={onProfilePhotoChange}
             />
             <Education
             education={education}
