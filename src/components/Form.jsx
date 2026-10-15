@@ -17,6 +17,8 @@ export default function Form({
     onRemoveEducation,
     experience,
     onExperienceChange,
+    onAddExperience,
+    onRemoveExperience,
     skills,
     onSkillsChange,
     projects,
@@ -45,6 +47,8 @@ export default function Form({
             <Experience
             experience={experience}
             onExperienceChange={onExperienceChange}
+            onAddExperience={onAddExperience}
+            onRemoveExperience={onRemoveExperience}
             />
             <Skills
             skills={skills}

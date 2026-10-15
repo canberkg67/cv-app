@@ -30,6 +30,16 @@ export default function Preview({
             if (!second.schoolEndDate) return -1;
             return second.schoolEndDate.localeCompare(first.schoolEndDate);
         });
+    const filledExperience = experience
+        .map((entry, index) => ({ entry, index }))
+        .filter(({ entry }) =>
+            Object.entries(entry).some(([key, value]) => key !== "id" && value)
+        )
+        .sort(({ entry: first }, { entry: second }) => {
+            if (!first.jobEndDate) return second.jobEndDate ? -1 : 0;
+            if (!second.jobEndDate) return 1;
+            return second.jobEndDate.localeCompare(first.jobEndDate);
+        });
 
     return (
         <section className="cv-preview">
@@ -87,20 +97,32 @@ export default function Preview({
 
                 <section className="cv-section">
                     <h3>Experience</h3>
-                    <div>
-                        <h4>{experience.position || "Junior Architect"}</h4>
-                        <p>
-                            {experience.company || "Example Architecture Studio"}
-                            {" | "}
-                            {experience.jobStartDate || "2024"} –{" "}
-                            {experience.jobEndDate || "Present"}
-                        </p>
-                        {experience.jobLocation && <p>{experience.jobLocation}</p>}
-                        <p>
-                            {experience.jobDescription ||
-                                "Developed architectural concepts, prepared technical drawings, and collaborated with senior architects on residential projects."}
-                        </p>
-                    </div>
+                    {filledExperience.length > 0 ? (
+                        filledExperience.map(({ entry }) => (
+                            <div key={entry.id}>
+                                <h4>{entry.company}</h4>
+                                {(entry.position || entry.jobStartDate || entry.jobEndDate) && (
+                                    <p>
+                                        {entry.position}
+                                        {entry.position && (entry.jobStartDate || entry.jobEndDate) && " | "}
+                                        {entry.jobStartDate || "Start date not set"}
+                                        {" – "}
+                                        {entry.jobEndDate || "Present"}
+                                    </p>
+                                )}
+                                {entry.jobLocation && <p>{entry.jobLocation}</p>}
+                                {entry.jobDescription && <p>{entry.jobDescription}</p>}
+                            </div>
+                        ))
+                    ) : (
+                        <div>
+                            <h4>Junior Architect</h4>
+                            <p>Example Architecture Studio | 2024 – Present</p>
+                            <p>
+                                Developed architectural concepts, prepared technical drawings, and collaborated with senior architects on residential projects.
+                            </p>
+                        </div>
+                    )}
                 </section>
 
                 <section className="cv-section">

@@ -17,6 +17,18 @@ function createEmptyEducation(id) {
   }
 }
 
+function createEmptyExperience(id) {
+  return {
+    id,
+    company: '',
+    position: '',
+    jobLocation: '',
+    jobStartDate: '',
+    jobEndDate: '',
+    jobDescription: ''
+  }
+}
+
 export default function App() {
   const [personalInfo, setPersonalInfo] = useState({
     fullName: '',
@@ -32,14 +44,7 @@ export default function App() {
   
   const [education, setEducation] = useState([createEmptyEducation(1)])
   
-  const [experience, setExperience] = useState({
-    company: '',
-    position: '',
-    jobLocation: '',
-    jobStartDate: '',
-    jobEndDate: '',
-    jobDescription: ''
-  })
+  const [experience, setExperience] = useState([createEmptyExperience(1)])
 
   const [skills, setSkills] = useState('')
 
@@ -98,12 +103,24 @@ export default function App() {
     );
   }
 
-  function handleExperienceChange(event) {
+  function handleExperienceChange(id, event) {
     const { name, value } = event.target;
-    setExperience(prevExperience => ({
-      ...prevExperience,
-      [name]: value
-    }));
+    setExperience(prevExperience => prevExperience.map(entry =>
+      entry.id === id ? { ...entry, [name]: value } : entry
+    ));
+  }
+
+  function handleAddExperience() {
+    setExperience(prevExperience => {
+      const nextId = Math.max(0, ...prevExperience.map(entry => entry.id)) + 1;
+      return [...prevExperience, createEmptyExperience(nextId)];
+    });
+  }
+
+  function handleRemoveExperience(id) {
+    setExperience(prevExperience =>
+      prevExperience.filter(entry => entry.id !== id)
+    );
   }
 
   function handleSkillsChange(event) {
@@ -159,6 +176,8 @@ export default function App() {
           onRemoveEducation={handleRemoveEducation}
           experience={experience}
           onExperienceChange={handleExperienceChange}
+          onAddExperience={handleAddExperience}
+          onRemoveExperience={handleRemoveExperience}
           skills={skills}
           onSkillsChange={handleSkillsChange}
           projects={projects}
