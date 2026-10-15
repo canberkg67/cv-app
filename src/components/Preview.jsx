@@ -43,6 +43,13 @@ export default function Preview({
     const filledProjects = projects.filter(entry =>
         entry.projectName || entry.projectLink || entry.projectDescription
     );
+    const filledCertificates = certificates.filter(entry =>
+        entry.certificateName || entry.issuingOrganization ||
+        entry.certificateDate || entry.certificateLink
+    );
+    const filledExams = exams.filter(entry =>
+        entry.examName || entry.examScore || entry.examDate || entry.examDetails
+    );
 
     return (
         <section className="cv-preview">
@@ -172,30 +179,51 @@ export default function Preview({
 
                 <section className="cv-section">
                     <h3>Certificates</h3>
-                    <div>
-                        <h4>{certificates.certificateName || "Building Information Modeling"}</h4>
-                        <p>
-                            {certificates.issuingOrganization || "Example Design Academy"}
-                            {" | "}
-                            {certificates.certificateDate || "2023"}
-                        </p>
-                        {certificates.certificateLink && (
-                            <p>{certificates.certificateLink}</p>
-                        )}
-                    </div>
+                    {filledCertificates.length > 0 ? (
+                        filledCertificates.map(entry => (
+                            <div key={entry.id}>
+                                {entry.certificateName && <h4>{entry.certificateName}</h4>}
+                                {(entry.issuingOrganization || entry.certificateDate) && (
+                                    <p>
+                                        {entry.issuingOrganization}
+                                        {entry.issuingOrganization && entry.certificateDate && " | "}
+                                        {entry.certificateDate}
+                                    </p>
+                                )}
+                                {entry.certificateLink && <p>{entry.certificateLink}</p>}
+                            </div>
+                        ))
+                    ) : (
+                        <div>
+                            <h4>Building Information Modeling</h4>
+                            <p>Example Design Academy | 2023</p>
+                        </div>
+                    )}
                 </section>
 
                 <section className="cv-section">
                     <h3>Exams</h3>
-                    <div>
-                        <h4>{exams.examName || "IELTS"}</h4>
-                        <p>
-                            {exams.examScore || "8.0"}
-                            {" | "}
-                            {exams.examDate || "2024"}
-                        </p>
-                        <p>{exams.examDetails || "Overall band score"}</p>
-                    </div>
+                    {filledExams.length > 0 ? (
+                        filledExams.map(entry => (
+                            <div key={entry.id}>
+                                {entry.examName && <h4>{entry.examName}</h4>}
+                                {(entry.examScore || entry.examDate) && (
+                                    <p>
+                                        {entry.examScore}
+                                        {entry.examScore && entry.examDate && " | "}
+                                        {entry.examDate}
+                                    </p>
+                                )}
+                                {entry.examDetails && <p>{entry.examDetails}</p>}
+                            </div>
+                        ))
+                    ) : (
+                        <div>
+                            <h4>IELTS</h4>
+                            <p>8.0 | 2024</p>
+                            <p>Overall band score</p>
+                        </div>
+                    )}
                 </section>
 
                 <section className="cv-section">

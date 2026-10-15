@@ -27,8 +27,12 @@ export default function Form({
     onRemoveProject,
     certificates,
     onCertificatesChange,
+    onAddCertificate,
+    onRemoveCertificate,
     exams,
     onExamsChange,
+    onAddExam,
+    onRemoveExam,
     language,
     onLanguageChange,
     other,
@@ -65,10 +69,14 @@ export default function Form({
             <Certificates
             certificates={certificates}
             onCertificatesChange={onCertificatesChange}
+            onAddCertificate={onAddCertificate}
+            onRemoveCertificate={onRemoveCertificate}
             />
             <Exams
             exams={exams}
             onExamsChange={onExamsChange}
+            onAddExam={onAddExam}
+            onRemoveExam={onRemoveExam}
             />
             <Languages
             language={language}

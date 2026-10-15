@@ -38,6 +38,26 @@ function createEmptyProject(id) {
   }
 }
 
+function createEmptyCertificate(id) {
+  return {
+    id,
+    certificateName: '',
+    issuingOrganization: '',
+    certificateDate: '',
+    certificateLink: ''
+  }
+}
+
+function createEmptyExam(id) {
+  return {
+    id,
+    examName: '',
+    examScore: '',
+    examDate: '',
+    examDetails: ''
+  }
+}
+
 export default function App() {
   const [personalInfo, setPersonalInfo] = useState({
     fullName: '',
@@ -59,19 +79,9 @@ export default function App() {
 
   const [projects, setProjects] = useState([createEmptyProject(1)])
 
-  const [certificates, setCertificates] = useState({
-    certificateName: '',
-    issuingOrganization: '',
-    certificateDate: '',
-    certificateLink: ''
-  })
+  const [certificates, setCertificates] = useState([createEmptyCertificate(1)])
 
-  const [exams, setExams] = useState({
-    examName: '',
-    examScore: '',
-    examDate: '',
-    examDetails: ''
-  })
+  const [exams, setExams] = useState([createEmptyExam(1)])
 
   const [language, setLanguage] = useState({
     language: '',
@@ -152,20 +162,44 @@ export default function App() {
     );
   }
 
-  function handleCertificatesChange(event) {
+  function handleCertificatesChange(id, event) {
     const { name, value } = event.target;
-    setCertificates(prevCertificates => ({
-      ...prevCertificates,
-      [name]: value
-    }));
+    setCertificates(prevCertificates => prevCertificates.map(entry =>
+      entry.id === id ? { ...entry, [name]: value } : entry
+    ));
   }
 
-  function handleExamsChange(event) {
+  function handleAddCertificate() {
+    setCertificates(prevCertificates => {
+      const nextId = Math.max(0, ...prevCertificates.map(entry => entry.id)) + 1;
+      return [...prevCertificates, createEmptyCertificate(nextId)];
+    });
+  }
+
+  function handleRemoveCertificate(id) {
+    setCertificates(prevCertificates =>
+      prevCertificates.filter(entry => entry.id !== id)
+    );
+  }
+
+  function handleExamsChange(id, event) {
     const { name, value } = event.target;
-    setExams(prevExams => ({
-      ...prevExams,
-      [name]: value
-    }));
+    setExams(prevExams => prevExams.map(entry =>
+      entry.id === id ? { ...entry, [name]: value } : entry
+    ));
+  }
+
+  function handleAddExam() {
+    setExams(prevExams => {
+      const nextId = Math.max(0, ...prevExams.map(entry => entry.id)) + 1;
+      return [...prevExams, createEmptyExam(nextId)];
+    });
+  }
+
+  function handleRemoveExam(id) {
+    setExams(prevExams =>
+      prevExams.filter(entry => entry.id !== id)
+    );
   }
 
   function handleLanguageChange(event) {
@@ -203,8 +237,12 @@ export default function App() {
           onRemoveProject={handleRemoveProject}
           certificates={certificates}
           onCertificatesChange={handleCertificatesChange}
+          onAddCertificate={handleAddCertificate}
+          onRemoveCertificate={handleRemoveCertificate}
           exams={exams}
           onExamsChange={handleExamsChange}
+          onAddExam={handleAddExam}
+          onRemoveExam={handleRemoveExam}
           language={language}
           onLanguageChange={handleLanguageChange}
           other={other}
