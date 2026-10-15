@@ -35,6 +35,8 @@ export default function Form({
     onRemoveExam,
     language,
     onLanguageChange,
+    onAddLanguage,
+    onRemoveLanguage,
     other,
     onOtherChange
 }) {
@@ -81,6 +83,8 @@ export default function Form({
             <Languages
             language={language}
             onLanguageChange={onLanguageChange}
+            onAddLanguage={onAddLanguage}
+            onRemoveLanguage={onRemoveLanguage}
             />
             <Other
             other={other}

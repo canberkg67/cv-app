@@ -58,6 +58,14 @@ function createEmptyExam(id) {
   }
 }
 
+function createEmptyLanguage(id) {
+  return {
+    id,
+    language: '',
+    languageLevel: ''
+  }
+}
+
 export default function App() {
   const [personalInfo, setPersonalInfo] = useState({
     fullName: '',
@@ -83,10 +91,7 @@ export default function App() {
 
   const [exams, setExams] = useState([createEmptyExam(1)])
 
-  const [language, setLanguage] = useState({
-    language: '',
-    languageLevel: ''
-  })
+  const [language, setLanguage] = useState([createEmptyLanguage(1)])
 
   const [other, setOther] = useState('')
 
@@ -202,12 +207,24 @@ export default function App() {
     );
   }
 
-  function handleLanguageChange(event) {
+  function handleLanguageChange(id, event) {
     const { name, value } = event.target;
-    setLanguage(prevLanguage => ({
-      ...prevLanguage,
-      [name]: value
-    }));
+    setLanguage(prevLanguage => prevLanguage.map(entry =>
+      entry.id === id ? { ...entry, [name]: value } : entry
+    ));
+  }
+
+  function handleAddLanguage() {
+    setLanguage(prevLanguage => {
+      const nextId = Math.max(0, ...prevLanguage.map(entry => entry.id)) + 1;
+      return [...prevLanguage, createEmptyLanguage(nextId)];
+    });
+  }
+
+  function handleRemoveLanguage(id) {
+    setLanguage(prevLanguage =>
+      prevLanguage.filter(entry => entry.id !== id)
+    );
   }
 
   function handleOtherChange(event) {
@@ -245,6 +262,8 @@ export default function App() {
           onRemoveExam={handleRemoveExam}
           language={language}
           onLanguageChange={handleLanguageChange}
+          onAddLanguage={handleAddLanguage}
+          onRemoveLanguage={handleRemoveLanguage}
           other={other}
           onOtherChange={handleOtherChange}
         />

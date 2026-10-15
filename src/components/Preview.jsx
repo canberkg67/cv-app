@@ -50,6 +50,9 @@ export default function Preview({
     const filledExams = exams.filter(entry =>
         entry.examName || entry.examScore || entry.examDate || entry.examDetails
     );
+    const filledLanguages = language.filter(entry =>
+        entry.language || entry.languageLevel
+    );
 
     return (
         <section className="cv-preview">
@@ -228,11 +231,20 @@ export default function Preview({
 
                 <section className="cv-section">
                     <h3>Languages</h3>
-                    <p>
-                        {language.language || "English"}
-                        {" — "}
-                        {language.languageLevel || "Native"}
-                    </p>
+                    {filledLanguages.length > 0 ? (
+                        filledLanguages.map(entry => (
+                            <p key={entry.id}>
+                                {entry.language || "Language"}
+                                {entry.language && entry.languageLevel && " — "}
+                                {entry.languageLevel}
+                            </p>
+                        ))
+                    ) : (
+                        <>
+                            <p>English — Native</p>
+                            <p>Spanish — B1 Intermediate</p>
+                        </>
+                    )}
                 </section>
 
                 <section className="cv-section">
