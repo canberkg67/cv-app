@@ -1,4 +1,9 @@
-export default function Preview({ personalInfo, education, experience }) {
+export default function Preview({ personalInfo, education, experience, skills }) {
+    const skillList = skills
+        .split("\n")
+        .map((skill) => skill.trim())
+        .filter(Boolean);
+
     return (
         <section className="cv-preview">
             <h2>Live Preview</h2>
@@ -61,10 +66,22 @@ export default function Preview({ personalInfo, education, experience }) {
 
                 <section className="cv-section">
                     <h3>Skills</h3>
-                    <p>
-                        AutoCAD, Revit, SketchUp, Rhino, Adobe Photoshop,
-                        3D Modeling, Technical Drawing
-                    </p>
+                    <ul>
+                        {(skillList.length > 0
+                            ? skillList
+                            : [
+                                "AutoCAD",
+                                "Revit",
+                                "SketchUp",
+                                "Rhino",
+                                "Adobe Photoshop",
+                                "3D Modeling",
+                                "Technical Drawing",
+                            ]
+                        ).map((skill, index) => (
+                            <li key={`${skill}-${index}`}>{skill}</li>
+                        ))}
+                    </ul>
                 </section>
 
                 <section className="cv-section">

@@ -33,6 +33,7 @@ export default function App() {
     jobEndDate: '',
     jobDescription: ''
   })
+  const [skills, setSkills] = useState('')
 
   function handlePersonalInfoChange(event) {
     const { name, value } = event.target;
@@ -58,6 +59,10 @@ export default function App() {
     }));
   }
 
+  function handleSkillsChange(event) {
+    setSkills(event.target.value);
+  }
+
   return (
     <>
       <Header />
@@ -69,11 +74,14 @@ export default function App() {
           onEducationChange={handleEducationChange}
           experience={experience}
           onExperienceChange={handleExperienceChange}
+          skills={skills}
+          onSkillsChange={handleSkillsChange}
         />
         <Preview
           personalInfo={personalInfo}
           education={education}
           experience={experience}
+          skills={skills}
         />
       </main>
     </>
