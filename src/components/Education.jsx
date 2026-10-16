@@ -8,8 +8,10 @@ export default function Education({
         <section className="education">
             <h2>Education</h2>
             {education.map((entry, index) => (
-                <div className="education-entry" key={entry.id}>
-                    <h3>Education {index + 1}</h3>
+                <div className="form-entry-group" key={entry.id}>
+                    <div className="education-entry">
+                    <h3>Education {education.length - index}</h3>
+                    <fieldset disabled={index !== 0}>
                     <div>
                         <label htmlFor={`school-${entry.id}`}>School</label>
                         <input
@@ -86,19 +88,27 @@ export default function Education({
                             onChange={(event) => onEducationChange(entry.id, event)}
                         />
                     </div>
-
+                    </fieldset>
+                    {index === 0 && (
+                        <button type="button" onClick={onAddEducation}>
+                            Add Education
+                        </button>
+                    )}
+                    </div>
                     <button
                         type="button"
                         onClick={() => onRemoveEducation(entry.id)}
-                        aria-label={`Remove education ${index + 1}`}
+                        aria-label={`Remove education ${education.length - index}`}
                     >
-                        Remove Education
+                        Remove Education {education.length - index}
                     </button>
                 </div>
             ))}
-            <button type="button" onClick={onAddEducation}>
-                Add Education
-            </button>
+            {education.length === 0 && (
+                <button type="button" onClick={onAddEducation}>
+                    Add Education
+                </button>
+            )}
         </section>
     );
 }

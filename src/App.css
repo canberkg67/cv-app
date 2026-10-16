@@ -193,6 +193,14 @@ body {
     grid-column: 1 / -1;
 }
 
+.cv-form .form-entry-group {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+}
+
 .cv-form [class$="-entry"] {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -203,18 +211,27 @@ body {
     background-color: var(--surface-muted);
 }
 
+.cv-form fieldset {
+    display: contents;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
 .cv-form [class$="-entry"] > h3,
 .cv-form [class$="-entry"] > button {
     grid-column: 1 / -1;
 }
 
-.cv-form [class$="-entry"] > div {
+.cv-form [class$="-entry"] > div,
+.cv-form [class$="-entry"] > fieldset > div {
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
 }
 
-.cv-form [class$="-entry"] > div:has(textarea) {
+.cv-form [class$="-entry"] > div:has(textarea),
+.cv-form [class$="-entry"] > fieldset > div:has(textarea) {
     grid-column: 1 / -1;
 }
 

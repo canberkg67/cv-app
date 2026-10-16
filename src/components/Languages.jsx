@@ -8,8 +8,10 @@ export default function Languages({
         <section className="form-languages">
             <h2>Languages</h2>
             {language.map((entry, index) => (
-                <div className="language-entry" key={entry.id}>
-                    <h3>Language {index + 1}</h3>
+                <div className="form-entry-group" key={entry.id}>
+                    <div className="language-entry">
+                    <h3>Language {language.length - index}</h3>
+                    <fieldset disabled={index !== 0}>
                     <div>
                         <label htmlFor={`language-${entry.id}`}>Language</label>
                         <input
@@ -43,19 +45,27 @@ export default function Languages({
                             <option value="C2">C2 - Proficient</option>
                         </select>
                     </div>
-
+                    </fieldset>
+                    {index === 0 && (
+                        <button type="button" onClick={onAddLanguage}>
+                            Add Language
+                        </button>
+                    )}
+                    </div>
                     <button
                         type="button"
                         onClick={() => onRemoveLanguage(entry.id)}
-                        aria-label={`Remove language ${index + 1}`}
+                        aria-label={`Remove language ${language.length - index}`}
                     >
-                        Remove Language
+                        Remove Language {language.length - index}
                     </button>
                 </div>
             ))}
-            <button type="button" onClick={onAddLanguage}>
-                Add Language
-            </button>
+            {language.length === 0 && (
+                <button type="button" onClick={onAddLanguage}>
+                    Add Language
+                </button>
+            )}
         </section>
     );
 }

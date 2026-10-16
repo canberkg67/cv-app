@@ -138,7 +138,7 @@ export default function App() {
   function handleAddEducation() {
     setEducation(prevEducation => {
       const nextId = Math.max(0, ...prevEducation.map(entry => entry.id)) + 1;
-      return [...prevEducation, createEmptyEducation(nextId)];
+      return [createEmptyEducation(nextId), ...prevEducation];
     });
   }
 
@@ -158,7 +158,7 @@ export default function App() {
   function handleAddExperience() {
     setExperience(prevExperience => {
       const nextId = Math.max(0, ...prevExperience.map(entry => entry.id)) + 1;
-      return [...prevExperience, createEmptyExperience(nextId)];
+      return [createEmptyExperience(nextId), ...prevExperience];
     });
   }
 
@@ -182,7 +182,7 @@ export default function App() {
   function handleAddProject() {
     setProjects(prevProjects => {
       const nextId = Math.max(0, ...prevProjects.map(entry => entry.id)) + 1;
-      return [...prevProjects, createEmptyProject(nextId)];
+      return [createEmptyProject(nextId), ...prevProjects];
     });
   }
 
@@ -202,7 +202,7 @@ export default function App() {
   function handleAddCertificate() {
     setCertificates(prevCertificates => {
       const nextId = Math.max(0, ...prevCertificates.map(entry => entry.id)) + 1;
-      return [...prevCertificates, createEmptyCertificate(nextId)];
+      return [createEmptyCertificate(nextId), ...prevCertificates];
     });
   }
 
@@ -222,7 +222,7 @@ export default function App() {
   function handleAddExam() {
     setExams(prevExams => {
       const nextId = Math.max(0, ...prevExams.map(entry => entry.id)) + 1;
-      return [...prevExams, createEmptyExam(nextId)];
+      return [createEmptyExam(nextId), ...prevExams];
     });
   }
 
@@ -242,7 +242,7 @@ export default function App() {
   function handleAddLanguage() {
     setLanguage(prevLanguage => {
       const nextId = Math.max(0, ...prevLanguage.map(entry => entry.id)) + 1;
-      return [...prevLanguage, createEmptyLanguage(nextId)];
+      return [createEmptyLanguage(nextId), ...prevLanguage];
     });
   }
 

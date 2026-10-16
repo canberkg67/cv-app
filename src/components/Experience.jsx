@@ -8,8 +8,10 @@ export default function Experience({
         <section className="experience">
             <h2>Experience</h2>
             {experience.map((entry, index) => (
-                <div className="experience-entry" key={entry.id}>
-                    <h3>Experience {index + 1}</h3>
+                <div className="form-entry-group" key={entry.id}>
+                    <div className="experience-entry">
+                    <h3>Experience {experience.length - index}</h3>
+                    <fieldset disabled={index !== 0}>
                     <div>
                         <label htmlFor={`company-${entry.id}`}>Company</label>
                         <input
@@ -75,19 +77,27 @@ export default function Experience({
                             onChange={(event) => onExperienceChange(entry.id, event)}
                         />
                     </div>
-
+                    </fieldset>
+                    {index === 0 && (
+                        <button type="button" onClick={onAddExperience}>
+                            Add Experience
+                        </button>
+                    )}
+                    </div>
                     <button
                         type="button"
                         onClick={() => onRemoveExperience(entry.id)}
-                        aria-label={`Remove experience ${index + 1}`}
+                        aria-label={`Remove experience ${experience.length - index}`}
                     >
-                        Remove Experience
+                        Remove Experience {experience.length - index}
                     </button>
                 </div>
             ))}
-            <button type="button" onClick={onAddExperience}>
-                Add Experience
-            </button>
+            {experience.length === 0 && (
+                <button type="button" onClick={onAddExperience}>
+                    Add Experience
+                </button>
+            )}
         </section>
     );
 }

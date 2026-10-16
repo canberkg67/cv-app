@@ -8,8 +8,10 @@ export default function Certificates({
         <section className="form-certificates">
             <h2>Certificates</h2>
             {certificates.map((entry, index) => (
-                <div className="certificate-entry" key={entry.id}>
-                    <h3>Certificate {index + 1}</h3>
+                <div className="form-entry-group" key={entry.id}>
+                    <div className="certificate-entry">
+                    <h3>Certificate {certificates.length - index}</h3>
+                    <fieldset disabled={index !== 0}>
                     <div>
                         <label htmlFor={`certificateName-${entry.id}`}>Certificate Name</label>
                         <input
@@ -55,19 +57,27 @@ export default function Certificates({
                             onChange={(event) => onCertificatesChange(entry.id, event)}
                         />
                     </div>
-
+                    </fieldset>
+                    {index === 0 && (
+                        <button type="button" onClick={onAddCertificate}>
+                            Add Certificate
+                        </button>
+                    )}
+                    </div>
                     <button
                         type="button"
                         onClick={() => onRemoveCertificate(entry.id)}
-                        aria-label={`Remove certificate ${index + 1}`}
+                        aria-label={`Remove certificate ${certificates.length - index}`}
                     >
-                        Remove Certificate
+                        Remove Certificate {certificates.length - index}
                     </button>
                 </div>
             ))}
-            <button type="button" onClick={onAddCertificate}>
-                Add Certificate
-            </button>
+            {certificates.length === 0 && (
+                <button type="button" onClick={onAddCertificate}>
+                    Add Certificate
+                </button>
+            )}
         </section>
     );
 }

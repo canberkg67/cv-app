@@ -8,8 +8,10 @@ export default function Exams({
         <section className="cv-exams">
             <h2>Exams</h2>
             {exams.map((entry, index) => (
-                <div className="exam-entry" key={entry.id}>
-                    <h3>Exam {index + 1}</h3>
+                <div className="form-entry-group" key={entry.id}>
+                    <div className="exam-entry">
+                    <h3>Exam {exams.length - index}</h3>
+                    <fieldset disabled={index !== 0}>
                     <div className="form-field">
                         <label htmlFor={`examName-${entry.id}`}>Exam Name</label>
                         <input
@@ -55,19 +57,27 @@ export default function Exams({
                             onChange={(event) => onExamsChange(entry.id, event)}
                         />
                     </div>
-
+                    </fieldset>
+                    {index === 0 && (
+                        <button type="button" onClick={onAddExam}>
+                            Add Exam
+                        </button>
+                    )}
+                    </div>
                     <button
                         type="button"
                         onClick={() => onRemoveExam(entry.id)}
-                        aria-label={`Remove exam ${index + 1}`}
+                        aria-label={`Remove exam ${exams.length - index}`}
                     >
-                        Remove Exam
+                        Remove Exam {exams.length - index}
                     </button>
                 </div>
             ))}
-            <button type="button" onClick={onAddExam}>
-                Add Exam
-            </button>
+            {exams.length === 0 && (
+                <button type="button" onClick={onAddExam}>
+                    Add Exam
+                </button>
+            )}
         </section>
     )
 }
