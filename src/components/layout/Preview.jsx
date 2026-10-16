@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { translations } from "../../translation";
 import "../styles/preview.css";
 
 function hasValue(value) {
@@ -21,6 +23,8 @@ export default function Preview({
     language,
     other
 }) {
+    const [previewLanguage, setPreviewLanguage] = useState("en");
+    const previewTranslations = translations[previewLanguage].preview;
     const skillList = skills.split("\n").map(skill => skill.trim()).filter(Boolean);
     const otherList = other.split("\n").map(item => item.trim()).filter(Boolean);
     const filledEducation = education
@@ -46,7 +50,23 @@ export default function Preview({
     return (
         <section className="cv-preview">
             <h2>Live Preview</h2>
-            <div className="cv-page" lang="en">
+            <div className="preview-language-switch" role="group" aria-label="CV language">
+                <button
+                    type="button"
+                    aria-pressed={previewLanguage === "en"}
+                    onClick={() => setPreviewLanguage("en")}
+                >
+                    English
+                </button>
+                <button
+                    type="button"
+                    aria-pressed={previewLanguage === "tr"}
+                    onClick={() => setPreviewLanguage("tr")}
+                >
+                    Türkçe
+                </button>
+            </div>
+            <div className="cv-page" lang={previewLanguage}>
                 {hasPersonalInfo && (
                     <header className="cv-header">
                         {personalInfo.profilePhoto && (
@@ -68,14 +88,14 @@ export default function Preview({
 
                 {hasValue(personalInfo.about) && (
                     <section className="cv-section">
-                        <h3>About</h3>
+                        <h3>{previewTranslations.about}</h3>
                         <p>{personalInfo.about}</p>
                     </section>
                 )}
 
                 {filledEducation.length > 0 && (
                     <section className="cv-section">
-                        <h3>Education</h3>
+                        <h3>{previewTranslations.education}</h3>
                         {filledEducation.map(entry => (
                             <div key={entry.id}>
                                 {hasValue(entry.school) && <h4>{entry.school}</h4>}
@@ -97,7 +117,7 @@ export default function Preview({
 
                 {filledExperience.length > 0 && (
                     <section className="cv-section">
-                        <h3>Experience</h3>
+                        <h3>{previewTranslations.experience}</h3>
                         {filledExperience.map(entry => (
                             <div key={entry.id}>
                                 {hasValue(entry.company) && <h4>{entry.company}</h4>}
@@ -119,7 +139,7 @@ export default function Preview({
 
                 {skillList.length > 0 && (
                     <section className="cv-section">
-                        <h3>Skills</h3>
+                        <h3>{previewTranslations.skills}</h3>
                         <ul>
                             {skillList.map((skill, index) => (
                                 <li key={`${skill}-${index}`}>{skill}</li>
@@ -130,7 +150,7 @@ export default function Preview({
 
                 {filledProjects.length > 0 && (
                     <section className="cv-section">
-                        <h3>Projects</h3>
+                        <h3>{previewTranslations.projects}</h3>
                         {filledProjects.map(entry => (
                             <div key={entry.id}>
                                 {hasValue(entry.projectName) && <h4>{entry.projectName}</h4>}
@@ -143,7 +163,7 @@ export default function Preview({
 
                 {filledCertificates.length > 0 && (
                     <section className="cv-section">
-                        <h3>Certificates</h3>
+                        <h3>{previewTranslations.certificates}</h3>
                         {filledCertificates.map(entry => (
                             <div key={entry.id}>
                                 {hasValue(entry.certificateName) && <h4>{entry.certificateName}</h4>}
@@ -162,7 +182,7 @@ export default function Preview({
 
                 {filledExams.length > 0 && (
                     <section className="cv-section">
-                        <h3>Exams</h3>
+                        <h3>{previewTranslations.exams}</h3>
                         {filledExams.map(entry => (
                             <div key={entry.id}>
                                 {hasValue(entry.examName) && <h4>{entry.examName}</h4>}
@@ -181,7 +201,7 @@ export default function Preview({
 
                 {filledLanguages.length > 0 && (
                     <section className="cv-section">
-                        <h3>Languages</h3>
+                        <h3>{previewTranslations.languages}</h3>
                         {filledLanguages.map(entry => (
                             <p key={entry.id}>
                                 {entry.language}
@@ -194,7 +214,7 @@ export default function Preview({
 
                 {otherList.length > 0 && (
                     <section className="cv-section">
-                        <h3>Other Information</h3>
+                        <h3>{previewTranslations.otherInformation}</h3>
                         <ul>
                             {otherList.map((item, index) => (
                                 <li key={`${item}-${index}`}>{item}</li>
