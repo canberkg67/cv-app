@@ -1,13 +1,13 @@
-import "./styles/form.css";
-import Education from "./Education";
-import PersonalInfo from "./PersonalInfo";
-import Experience from "./Experience";
-import Skills from "./Skills";
-import Projects from "./Projects";
-import Certificates from "./Certificates";
-import Exams from "./Exams";
-import Languages from "./Languages";
-import Other from "./Other";
+import "../styles/form.css";
+import Education from "../form/Education";
+import PersonalInfo from "../form/PersonalInfo";
+import Experience from "../form/Experience";
+import Skills from "../form/Skills";
+import Projects from "../form/Projects";
+import Certificates from "../form/Certificates";
+import Exams from "../form/Exams";
+import Languages from "../form/Languages";
+import Other from "../form/Other";
 
 export default function Form({
     personalInfo,

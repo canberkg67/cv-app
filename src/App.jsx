@@ -1,11 +1,11 @@
 import './components/styles/app.css'
 import './components/styles/layout.css'
 import { useEffect, useRef, useState } from 'react'
-import Header from './components/Header'
-import CtaArrow from './components/CtaArrow'
-import Form from './components/Form'
-import Footer from './components/Footer'
-import Preview from './components/Preview'
+import Header from './components/layout/Header'
+import CtaArrow from './components/svg/CtaArrow'
+import Form from './components/layout/Form'
+import Footer from './components/layout/Footer'
+import Preview from './components/layout/Preview'
 
 function createEmptyEducation(id) {
   return {

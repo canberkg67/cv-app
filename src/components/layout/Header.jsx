@@ -1,5 +1,5 @@
-import "./styles/header.css";
-import PrivIcon from "./PrivIcon";
+import "../styles/header.css";
+import PrivIcon from "../svg/PrivIcon";
 
 export default function Header() {
     return (

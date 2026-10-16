@@ -1,4 +1,4 @@
-import "./styles/cta-arrow.css";
+import "../styles/cta-arrow.css";
 
 export default function CtaArrow() {
     return (
