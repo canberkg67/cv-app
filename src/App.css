@@ -20,7 +20,7 @@
 body {
     background-color: var(--app-bg);
     color: var(--text-primary);
-    font-family: Arial, sans-serif;
+    font-family: "Inter", Arial, sans-serif;
 }
 
 .app-header {
