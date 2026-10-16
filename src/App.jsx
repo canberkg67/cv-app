@@ -6,68 +6,14 @@ import CtaArrow from './components/svg/CtaArrow'
 import Form from './components/layout/Form'
 import Footer from './components/layout/Footer'
 import Preview from './components/layout/Preview'
-
-function createEmptyEducation(id) {
-  return {
-    id,
-    school: '',
-    degree: '',
-    fieldOfStudy: '',
-    schoolLocation: '',
-    schoolStartDate: '',
-    schoolEndDate: '',
-    schoolDescription: ''
-  }
-}
-
-function createEmptyExperience(id) {
-  return {
-    id,
-    company: '',
-    position: '',
-    jobLocation: '',
-    jobStartDate: '',
-    jobEndDate: '',
-    jobDescription: ''
-  }
-}
-
-function createEmptyProject(id) {
-  return {
-    id,
-    projectName: '',
-    projectLink: '',
-    projectDescription: ''
-  }
-}
-
-function createEmptyCertificate(id) {
-  return {
-    id,
-    certificateName: '',
-    issuingOrganization: '',
-    certificateDate: '',
-    certificateLink: ''
-  }
-}
-
-function createEmptyExam(id) {
-  return {
-    id,
-    examName: '',
-    examScore: '',
-    examDate: '',
-    examDetails: ''
-  }
-}
-
-function createEmptyLanguage(id) {
-  return {
-    id,
-    language: '',
-    languageLevel: ''
-  }
-}
+import {
+  createEmptyCertificate,
+  createEmptyEducation,
+  createEmptyExam,
+  createEmptyExperience,
+  createEmptyLanguage,
+  createEmptyProject
+} from './utils/cvFactories'
 
 export default function App() {
   const profilePhotoUrl = useRef(null)
