@@ -1,5 +1,6 @@
 .cv-preview {
     min-width: 0;
+    scroll-margin-top: 1rem;
 }
 
 .cv-preview > h2 {

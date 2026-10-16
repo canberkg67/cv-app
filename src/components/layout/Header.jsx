@@ -17,6 +17,10 @@ export default function Header() {
             <button type="button" onClick={() => window.print()}>
                 Download CV as PDF
             </button>
+            <p className="mobile-preview-link">
+                You can see the CV preview {" "}
+                <a href="#cv-preview">below</a>.
+            </p>
         </header>
     );
 }

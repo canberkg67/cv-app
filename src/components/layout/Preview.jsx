@@ -48,7 +48,7 @@ export default function Preview({
     const hasPersonalInfo = Object.values(personalInfo).some(hasValue);
 
     return (
-        <section className="cv-preview">
+        <section className="cv-preview" id="cv-preview">
             <h2>Live Preview</h2>
             <div className="preview-language-switch" role="group" aria-label="CV language">
                 <button

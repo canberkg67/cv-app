@@ -67,3 +67,78 @@
     border-color: #c3d0e0;
     background-color: #e1e9f3;
 }
+
+.mobile-preview-link {
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .app-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+        padding: 1rem 1.25rem;
+    }
+
+    .header-brand {
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .header-brand img {
+        width: 3.5rem;
+        height: 3.5rem;
+        flex: 0 0 auto;
+    }
+
+    .header-content {
+        gap: 0.4rem;
+    }
+
+    .header-content h1 {
+        margin: 0;
+        font-size: 1.6rem;
+    }
+
+    .header-content p,
+    .header-content .privacy-note {
+        margin: 0;
+        line-height: 1.4;
+    }
+
+    .app-header button {
+        align-self: flex-start;
+        margin: 0;
+    }
+
+    .mobile-preview-link {
+        display: inline-block;
+        align-self: flex-start;
+        margin: 0;
+        color: var(--text-secondary);
+    }
+
+    .mobile-preview-link a {
+        color: #1d4ed8;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+}
+
+@media (max-width: 640px) {
+    .app-header {
+        padding: 1rem;
+    }
+
+    .header-content h1 {
+        font-size: 1.4rem;
+    }
+
+    .header-content p {
+        font-size: 1rem;
+    }
+
+    .header-content .privacy-note {
+        font-size: 0.9rem;
+    }
+}
