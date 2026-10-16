@@ -14,7 +14,9 @@ export default function Header() {
                     </p>
                 </div>
             </div>
-            <button type="button">Download CV as PDF</button>
+            <button type="button" onClick={() => window.print()}>
+                Download CV as PDF
+            </button>
         </header>
     );
 }

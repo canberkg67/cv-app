@@ -96,3 +96,55 @@
 .cv-section p {
     margin: 0.2rem 0;
 }
+
+@media print {
+    @page {
+        size: A4;
+        margin: 0;
+    }
+
+    body {
+        background: #ffffff;
+    }
+
+    #root {
+        display: block;
+        min-height: 0;
+    }
+
+    .app-header,
+    .cta-arrow,
+    .cv-form,
+    .cv-preview > h2,
+    .preview-language-switch,
+    .app-footer {
+        display: none !important;
+    }
+
+    .cv-layout {
+        display: block;
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .cv-preview {
+        width: 100%;
+    }
+
+    .cv-page {
+        width: 100%;
+        max-width: none;
+        min-height: 0;
+        margin: 0;
+        padding: 15mm;
+        box-shadow: none;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+
+    .cv-section {
+        break-inside: avoid;
+    }
+}
