@@ -1,3 +1,5 @@
+import PrivIcon from "./PrivIcon";
+
 export default function Header() {
     return (
         <header className="app-header">
@@ -6,6 +8,9 @@ export default function Header() {
                 <div className="header-content">
                     <h1>Build Your CV</h1>
                     <p>Create a professional CV by filling out the form below and get your CV in PDF format.</p>
+                    <p className="privacy-note">
+                        <PrivIcon /> Privacy: Your data stays in your browser; it isn't sent to a remote database-server.
+                    </p>
                 </div>
             </div>
             <button type="button">Download CV as PDF</button>
