@@ -1,0 +1,24 @@
+#root {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+:root {
+    --app-bg: #f1f5f9;
+    --surface: #ffffff;
+    --surface-muted: #f8fafc;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --border-color: #e2e8f0;
+    --accent: #2563eb;
+    --accent-hover: #1d4ed8;
+    --card-shadow: 0 4px 14px rgb(15 23 42 / 6%), 0 1px 3px rgb(15 23 42 / 5%);
+}
+
+body {
+    background-color: var(--app-bg);
+    color: var(--text-primary);
+    font-family: "Inter", Arial, sans-serif;
+}

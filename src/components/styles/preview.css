@@ -1,0 +1,77 @@
+.cv-preview {
+    min-width: 0;
+}
+
+.cv-preview > h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.cv-page {
+    width: 100%;
+    max-width: 794px;
+    min-height: 1123px;
+    margin: 0 auto;
+    padding: 2.5rem;
+    background-color: #ffffff;
+    color: #1f2937;
+    font-family: Arial, sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    box-shadow: 0 2px 12px rgb(0 0 0 / 10%);
+}
+
+.cv-header {
+    border-bottom: 2px solid #334155;
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.cv-profile-photo {
+    display: block;
+    width: 6rem;
+    height: 6rem;
+    margin-bottom: 0.75rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.cv-header h1 {
+    margin: 0;
+    font-size: 2rem;
+    line-height: 1.2;
+}
+
+.cv-header h2 {
+    margin: 0.4rem 0 0.75rem;
+    color: #475569;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.cv-header p {
+    margin: 0.2rem 0;
+}
+
+.cv-section {
+    margin-bottom: 1.25rem;
+}
+
+.cv-section h3 {
+    margin: 0 0 0.6rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid #cbd5e1;
+    color: #334155;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.cv-section h4 {
+    margin: 0.65rem 0 0.2rem;
+    font-size: 0.9rem;
+}
+
+.cv-section p {
+    margin: 0.2rem 0;
+}

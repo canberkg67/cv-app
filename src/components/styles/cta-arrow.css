@@ -1,0 +1,43 @@
+.cta-arrow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 150px;
+    overflow: visible;
+    pointer-events: none;
+}
+
+.cta-arrow-shadow {
+    fill: none;
+    stroke: #94a3b8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 8;
+    opacity: 0.45;
+}
+
+.cta-arrow-line {
+    fill: none;
+    stroke: url(#cta-arrow-gradient);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 3;
+}
+
+.cta-arrow-head {
+    fill: #334155;
+}
+
+.cta-arrow-start {
+    fill: #ffffff;
+    stroke: #64748b;
+    stroke-width: 3;
+}
+
+@media (max-width: 900px) {
+    .cta-arrow {
+        display: none;
+    }
+}

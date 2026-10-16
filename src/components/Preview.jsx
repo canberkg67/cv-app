@@ -1,3 +1,5 @@
+import "./styles/preview.css";
+
 function hasValue(value) {
     return typeof value === "string" ? value.trim().length > 0 : Boolean(value);
 }

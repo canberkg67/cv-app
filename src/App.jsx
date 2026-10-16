@@ -1,4 +1,5 @@
-import './App.css'
+import './components/styles/app.css'
+import './components/styles/layout.css'
 import { useEffect, useRef, useState } from 'react'
 import Header from './components/Header'
 import CtaArrow from './components/CtaArrow'

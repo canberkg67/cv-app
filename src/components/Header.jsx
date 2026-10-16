@@ -1,3 +1,4 @@
+import "./styles/header.css";
 import PrivIcon from "./PrivIcon";
 
 export default function Header() {

@@ -1,0 +1,25 @@
+/* To show Form and Preview side by side */
+.cv-layout {
+    display: grid;
+    gap: 2rem;
+    padding: 2rem;
+    align-items: start;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    flex: 1;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+@media (max-width: 900px) {
+    .cv-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .cv-layout {
+        gap: 1.25rem;
+        padding: 1rem;
+    }
+}

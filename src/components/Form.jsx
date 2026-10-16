@@ -1,3 +1,4 @@
+import "./styles/form.css";
 import Education from "./Education";
 import PersonalInfo from "./PersonalInfo";
 import Experience from "./Experience";
