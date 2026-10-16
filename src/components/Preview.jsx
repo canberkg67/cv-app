@@ -1,3 +1,13 @@
+function hasValue(value) {
+    return typeof value === "string" ? value.trim().length > 0 : Boolean(value);
+}
+
+function hasEntryContent(entry) {
+    return Object.entries(entry).some(([key, value]) =>
+        key !== "id" && hasValue(value)
+    );
+}
+
 export default function Preview({
     personalInfo,
     education,
@@ -9,266 +19,187 @@ export default function Preview({
     language,
     other
 }) {
-    
-    const skillList = skills
-        .split("\n")
-        .map((skill) => skill.trim())
-        .filter(Boolean);
-    
-    const otherList = other
-        .split("\n")
-        .map((item) => item.trim())
-        .filter(Boolean);
-    
+    const skillList = skills.split("\n").map(skill => skill.trim()).filter(Boolean);
+    const otherList = other.split("\n").map(item => item.trim()).filter(Boolean);
     const filledEducation = education
-        .map((entry, index) => ({ entry, index }))
-        .filter(({ entry }) =>
-            Object.entries(entry).some(([key, value]) => key !== "id" && value)
-        )
-        .sort(({ entry: first }, { entry: second }) => {
-            if (!first.schoolEndDate) return second.schoolEndDate ? 1 : 0;
-            if (!second.schoolEndDate) return -1;
+        .filter(hasEntryContent)
+        .sort((first, second) => {
+            if (!hasValue(first.schoolEndDate)) return hasValue(second.schoolEndDate) ? 1 : 0;
+            if (!hasValue(second.schoolEndDate)) return -1;
             return second.schoolEndDate.localeCompare(first.schoolEndDate);
         });
     const filledExperience = experience
-        .map((entry, index) => ({ entry, index }))
-        .filter(({ entry }) =>
-            Object.entries(entry).some(([key, value]) => key !== "id" && value)
-        )
-        .sort(({ entry: first }, { entry: second }) => {
-            if (!first.jobEndDate) return second.jobEndDate ? -1 : 0;
-            if (!second.jobEndDate) return 1;
+        .filter(hasEntryContent)
+        .sort((first, second) => {
+            if (!hasValue(first.jobEndDate)) return hasValue(second.jobEndDate) ? -1 : 0;
+            if (!hasValue(second.jobEndDate)) return 1;
             return second.jobEndDate.localeCompare(first.jobEndDate);
         });
-    const filledProjects = projects.filter(entry =>
-        entry.projectName || entry.projectLink || entry.projectDescription
-    );
-    const filledCertificates = certificates.filter(entry =>
-        entry.certificateName || entry.issuingOrganization ||
-        entry.certificateDate || entry.certificateLink
-    );
-    const filledExams = exams.filter(entry =>
-        entry.examName || entry.examScore || entry.examDate || entry.examDetails
-    );
-    const filledLanguages = language.filter(entry =>
-        entry.language || entry.languageLevel
-    );
+    const filledProjects = projects.filter(hasEntryContent);
+    const filledCertificates = certificates.filter(hasEntryContent);
+    const filledExams = exams.filter(hasEntryContent);
+    const filledLanguages = language.filter(hasEntryContent);
+    const hasPersonalInfo = Object.values(personalInfo).some(hasValue);
 
     return (
         <section className="cv-preview">
             <h2>Live Preview</h2>
-
             <div className="cv-page" lang="en">
-                <header className="cv-header">
-                    {personalInfo.profilePhoto && (
-                        <img
-                            className="cv-profile-photo"
-                            src={personalInfo.profilePhoto}
-                            alt="Profile"
-                        />
-                    )}
-                    <h1>{personalInfo.fullName || "John Doe"}</h1>
-                    <h2>{personalInfo.title || "Architect"}</h2>
+                {hasPersonalInfo && (
+                    <header className="cv-header">
+                        {personalInfo.profilePhoto && (
+                            <img
+                                className="cv-profile-photo"
+                                src={personalInfo.profilePhoto}
+                                alt="Profile"
+                            />
+                        )}
+                        {hasValue(personalInfo.fullName) && <h1>{personalInfo.fullName}</h1>}
+                        {hasValue(personalInfo.title) && <h2>{personalInfo.title}</h2>}
+                        {["email", "phone", "location", "linkedin", "website"].map(field =>
+                            hasValue(personalInfo[field]) && (
+                                <p key={field}>{personalInfo[field]}</p>
+                            )
+                        )}
+                    </header>
+                )}
 
-                    <p>{personalInfo.email || "john.doe@example.com"}</p>
-                    <p>{personalInfo.phone || "+1 555 010 2040"}</p>
-                    <p>{personalInfo.location || "Portland, Oregon"}</p>
-                    <p>{personalInfo.linkedin || "linkedin.com/in/examplejohndoe"}</p>
-                    <p>{personalInfo.website || "portfolio.example.com"}</p>
-                    
-                </header>
+                {hasValue(personalInfo.about) && (
+                    <section className="cv-section">
+                        <h3>About</h3>
+                        <p>{personalInfo.about}</p>
+                    </section>
+                )}
 
-                <section className="cv-section">
-                    <h3>About</h3>
-                    <p>
-                        {personalInfo.about || "Creative and detail-oriented architect with an interest in sustainable design, urban spaces, and functional architecture. Experienced in developing design concepts and preparing architectural drawings."}
-                    </p>
-                </section>
-
-                <section className="cv-section">
-                    <h3>Education</h3>
-                    {filledEducation.length > 0 ? (
-                        filledEducation.map(({ entry }) => (
+                {filledEducation.length > 0 && (
+                    <section className="cv-section">
+                        <h3>Education</h3>
+                        {filledEducation.map(entry => (
                             <div key={entry.id}>
-                                <h4>{entry.school}</h4>
-                                {entry.degree && <p>{entry.degree}</p>}
-                                {entry.fieldOfStudy && <p>{entry.fieldOfStudy}</p>}
-                                {entry.schoolLocation && <p>{entry.schoolLocation}</p>}
-                                {(entry.schoolStartDate || entry.schoolEndDate) && (
+                                {hasValue(entry.school) && <h4>{entry.school}</h4>}
+                                {hasValue(entry.degree) && <p>{entry.degree}</p>}
+                                {hasValue(entry.fieldOfStudy) && <p>{entry.fieldOfStudy}</p>}
+                                {hasValue(entry.schoolLocation) && <p>{entry.schoolLocation}</p>}
+                                {(hasValue(entry.schoolStartDate) || hasValue(entry.schoolEndDate)) && (
                                     <p>
-                                        {entry.schoolStartDate || "Start date not set"} –{" "}
-                                        {entry.schoolEndDate || "Present"}
+                                        {entry.schoolStartDate}
+                                        {entry.schoolStartDate && entry.schoolEndDate && " – "}
+                                        {entry.schoolEndDate}
                                     </p>
                                 )}
-                                {entry.schoolDescription && (
-                                    <p>{entry.schoolDescription}</p>
-                                )}
+                                {hasValue(entry.schoolDescription) && <p>{entry.schoolDescription}</p>}
                             </div>
-                        ))
-                    ) : (
-                        <div>
-                            <h4>Example University</h4>
-                            <p>Master of Architecture</p>
-                            <p>2022 – 2024</p>
-                        </div>
-                    )}
-                </section>
+                        ))}
+                    </section>
+                )}
 
-                <section className="cv-section">
-                    <h3>Experience</h3>
-                    {filledExperience.length > 0 ? (
-                        filledExperience.map(({ entry }) => (
+                {filledExperience.length > 0 && (
+                    <section className="cv-section">
+                        <h3>Experience</h3>
+                        {filledExperience.map(entry => (
                             <div key={entry.id}>
-                                <h4>{entry.company}</h4>
-                                {(entry.position || entry.jobStartDate || entry.jobEndDate) && (
+                                {hasValue(entry.company) && <h4>{entry.company}</h4>}
+                                {(hasValue(entry.position) || hasValue(entry.jobStartDate) || hasValue(entry.jobEndDate)) && (
                                     <p>
                                         {entry.position}
                                         {entry.position && (entry.jobStartDate || entry.jobEndDate) && " | "}
-                                        {entry.jobStartDate || "Start date not set"}
-                                        {" – "}
-                                        {entry.jobEndDate || "Present"}
+                                        {entry.jobStartDate}
+                                        {entry.jobStartDate && entry.jobEndDate && " – "}
+                                        {entry.jobEndDate}
                                     </p>
                                 )}
-                                {entry.jobLocation && <p>{entry.jobLocation}</p>}
-                                {entry.jobDescription && <p>{entry.jobDescription}</p>}
+                                {hasValue(entry.jobLocation) && <p>{entry.jobLocation}</p>}
+                                {hasValue(entry.jobDescription) && <p>{entry.jobDescription}</p>}
                             </div>
-                        ))
-                    ) : (
-                        <div>
-                            <h4>Junior Architect</h4>
-                            <p>Example Architecture Studio | 2024 – Present</p>
-                            <p>
-                                Developed architectural concepts, prepared technical drawings, and collaborated with senior architects on residential projects.
-                            </p>
-                        </div>
-                    )}
-                </section>
-
-                <section className="cv-section">
-                    <h3>Skills</h3>
-                    <ul>
-                        {(skillList.length > 0
-                            ? skillList
-                            : [
-                                "AutoCAD",
-                                "Revit",
-                                "SketchUp",
-                                "Rhino",
-                                "Adobe Photoshop",
-                                "3D Modeling",
-                                "Technical Drawing",
-                            ]
-                        ).map((skill, index) => (
-                            <li key={`${skill}-${index}`}>{skill}</li>
                         ))}
-                    </ul>
-                </section>
+                    </section>
+                )}
 
-                <section className="cv-section">
-                    <h3>Projects</h3>
-                    {filledProjects.length > 0 ? (
-                        filledProjects.map(entry => (
+                {skillList.length > 0 && (
+                    <section className="cv-section">
+                        <h3>Skills</h3>
+                        <ul>
+                            {skillList.map((skill, index) => (
+                                <li key={`${skill}-${index}`}>{skill}</li>
+                            ))}
+                        </ul>
+                    </section>
+                )}
+
+                {filledProjects.length > 0 && (
+                    <section className="cv-section">
+                        <h3>Projects</h3>
+                        {filledProjects.map(entry => (
                             <div key={entry.id}>
-                                {entry.projectName && <h4>{entry.projectName}</h4>}
-                                {entry.projectLink && <p>{entry.projectLink}</p>}
-                                {entry.projectDescription && (
-                                    <p>{entry.projectDescription}</p>
-                                )}
+                                {hasValue(entry.projectName) && <h4>{entry.projectName}</h4>}
+                                {hasValue(entry.projectLink) && <p>{entry.projectLink}</p>}
+                                {hasValue(entry.projectDescription) && <p>{entry.projectDescription}</p>}
                             </div>
-                        ))
-                    ) : (
-                        <div>
-                            <h4>Sustainable Community Center</h4>
-                            <p>
-                                Developed a conceptual design for a community center focused on natural lighting, energy efficiency, and public accessibility.
-                            </p>
-                        </div>
-                    )}
-                </section>
+                        ))}
+                    </section>
+                )}
 
-                <section className="cv-section">
-                    <h3>Certificates</h3>
-                    {filledCertificates.length > 0 ? (
-                        filledCertificates.map(entry => (
+                {filledCertificates.length > 0 && (
+                    <section className="cv-section">
+                        <h3>Certificates</h3>
+                        {filledCertificates.map(entry => (
                             <div key={entry.id}>
-                                {entry.certificateName && <h4>{entry.certificateName}</h4>}
-                                {(entry.issuingOrganization || entry.certificateDate) && (
+                                {hasValue(entry.certificateName) && <h4>{entry.certificateName}</h4>}
+                                {(hasValue(entry.issuingOrganization) || hasValue(entry.certificateDate)) && (
                                     <p>
                                         {entry.issuingOrganization}
                                         {entry.issuingOrganization && entry.certificateDate && " | "}
                                         {entry.certificateDate}
                                     </p>
                                 )}
-                                {entry.certificateLink && <p>{entry.certificateLink}</p>}
+                                {hasValue(entry.certificateLink) && <p>{entry.certificateLink}</p>}
                             </div>
-                        ))
-                    ) : (
-                        <div>
-                            <h4>Building Information Modeling</h4>
-                            <p>Example Design Academy | 2023</p>
-                        </div>
-                    )}
-                </section>
+                        ))}
+                    </section>
+                )}
 
-                <section className="cv-section">
-                    <h3>Exams</h3>
-                    {filledExams.length > 0 ? (
-                        filledExams.map(entry => (
+                {filledExams.length > 0 && (
+                    <section className="cv-section">
+                        <h3>Exams</h3>
+                        {filledExams.map(entry => (
                             <div key={entry.id}>
-                                {entry.examName && <h4>{entry.examName}</h4>}
-                                {(entry.examScore || entry.examDate) && (
+                                {hasValue(entry.examName) && <h4>{entry.examName}</h4>}
+                                {(hasValue(entry.examScore) || hasValue(entry.examDate)) && (
                                     <p>
                                         {entry.examScore}
                                         {entry.examScore && entry.examDate && " | "}
                                         {entry.examDate}
                                     </p>
                                 )}
-                                {entry.examDetails && <p>{entry.examDetails}</p>}
+                                {hasValue(entry.examDetails) && <p>{entry.examDetails}</p>}
                             </div>
-                        ))
-                    ) : (
-                        <div>
-                            <h4>IELTS</h4>
-                            <p>8.0 | 2024</p>
-                            <p>Overall band score</p>
-                        </div>
-                    )}
-                </section>
+                        ))}
+                    </section>
+                )}
 
-                <section className="cv-section">
-                    <h3>Languages</h3>
-                    {filledLanguages.length > 0 ? (
-                        filledLanguages.map(entry => (
+                {filledLanguages.length > 0 && (
+                    <section className="cv-section">
+                        <h3>Languages</h3>
+                        {filledLanguages.map(entry => (
                             <p key={entry.id}>
-                                {entry.language || "Language"}
+                                {entry.language}
                                 {entry.language && entry.languageLevel && " — "}
                                 {entry.languageLevel}
                             </p>
-                        ))
-                    ) : (
-                        <>
-                            <p>English — Native</p>
-                            <p>Spanish — B1 Intermediate</p>
-                        </>
-                    )}
-                </section>
-
-                <section className="cv-section">
-                    <h3>Other Information</h3>
-                    <ul>
-                        {(otherList.length > 0
-                            ? otherList
-                            : [
-                                "Architectural photography",
-                                "Urban sketching",
-                                "Volunteering",
-                                "Sustainable design research",
-                            ]
-                        ).map((item, index) => (
-                            <li key={`${item}-${index}`}>{item}</li>
                         ))}
-                    </ul>
-                </section>
+                    </section>
+                )}
+
+                {otherList.length > 0 && (
+                    <section className="cv-section">
+                        <h3>Other Information</h3>
+                        <ul>
+                            {otherList.map((item, index) => (
+                                <li key={`${item}-${index}`}>{item}</li>
+                            ))}
+                        </ul>
+                    </section>
+                )}
             </div>
         </section>
     );
