@@ -1,6 +1,7 @@
 import './App.css'
 import { useEffect, useRef, useState } from 'react'
 import Header from './components/Header'
+import CtaArrow from './components/CtaArrow'
 import Form from './components/Form'
 import Footer from './components/Footer'
 import Preview from './components/Preview'
@@ -258,6 +259,9 @@ export default function App() {
   return (
     <>
       <Header />
+      
+      <CtaArrow />
+      
       <main className="cv-layout">
         <Form 
           personalInfo={personalInfo}
@@ -292,6 +296,7 @@ export default function App() {
           other={other}
           onOtherChange={handleOtherChange}
         />
+        
         <Preview
           personalInfo={personalInfo}
           education={education}
@@ -304,6 +309,7 @@ export default function App() {
           other={other}
         />
       </main>
+      
       <Footer />
     </>
   )
