@@ -1,4 +1,4 @@
-# CV App
+# CraftV - Create Your CV
 
 CV builder that works in your browser and made with React and Vite. Fill in your details,see preview dynamically as you write,choose a template and download your CV as PDF.
 

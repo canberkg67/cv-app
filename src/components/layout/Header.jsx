@@ -7,7 +7,7 @@ export default function Header() {
             <div className="header-brand">
                 <img src="/notebook.svg" alt="Logo" />
                 <div className="header-content">
-                    <h1>Build Your CV</h1>
+                    <h1>Build Your CV with CraftV</h1>
                     <p>Create a professional CV by filling out the form below and get your CV in PDF format.</p>
                     <p className="privacy-note">
                         <PrivIcon /> Privacy: Your data stays in your browser; it isn't sent to a remote database-server.
