@@ -200,6 +200,30 @@ export default function Preview({
             )}
         </section>
     );
+    const identityHeader = (
+        <header className="cv-header">
+            {personalInfo.profilePhoto && (
+                <img
+                    className="cv-profile-photo"
+                    src={personalInfo.profilePhoto}
+                    alt={previewTranslations.profileAlt}
+                />
+            )}
+            <div className="cv-header-content">
+                {hasValue(personalInfo.fullName) && <h1>{personalInfo.fullName}</h1>}
+                {hasValue(personalInfo.title) && <h2>{personalInfo.title}</h2>}
+                {!isProfessional && (
+                    <div className="cv-contact-details">
+                        {contactFields.map(field =>
+                            hasValue(personalInfo[field]) && (
+                                <p key={field}>{personalInfo[field]}</p>
+                            )
+                        )}
+                    </div>
+                )}
+            </div>
+        </header>
+    );
 
     return (
         <section className="cv-preview" id="cv-preview">
@@ -233,34 +257,12 @@ export default function Preview({
                 </select>
             </div>
             <div className={`cv-page cv-page--${template}`} lang={previewLanguage}>
-                {(isProfessional ? hasIdentity : hasPersonalInfo) && (
-                    <header className="cv-header">
-                        {personalInfo.profilePhoto && (
-                            <img
-                                className="cv-profile-photo"
-                                src={personalInfo.profilePhoto}
-                                alt={previewTranslations.profileAlt}
-                            />
-                        )}
-                        <div className="cv-header-content">
-                            {hasValue(personalInfo.fullName) && <h1>{personalInfo.fullName}</h1>}
-                            {hasValue(personalInfo.title) && <h2>{personalInfo.title}</h2>}
-                            {!isProfessional && (
-                                <div className="cv-contact-details">
-                                    {contactFields.map(field =>
-                                        hasValue(personalInfo[field]) && (
-                                            <p key={field}>{personalInfo[field]}</p>
-                                        )
-                                    )}
-                                </div>
-                            )}
-                        </div>
-                    </header>
-                )}
+                {!isProfessional && hasPersonalInfo && identityHeader}
 
                 {isProfessional ? (
                     <div className="cv-professional-layout">
                         <aside className="cv-sidebar">
+                            {hasIdentity && identityHeader}
                             {contactSection}
                             {skillsSection}
                             {languagesSection}
