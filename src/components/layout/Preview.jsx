@@ -24,6 +24,7 @@ export default function Preview({
     other
 }) {
     const [previewLanguage, setPreviewLanguage] = useState("en");
+    const [template, setTemplate] = useState("classic");
     const previewTranslations = translations[previewLanguage].preview;
     const skillList = skills.split("\n").map(skill => skill.trim()).filter(Boolean);
     const otherList = other.split("\n").map(item => item.trim()).filter(Boolean);
@@ -66,7 +67,18 @@ export default function Preview({
                     Türkçe
                 </button>
             </div>
-            <div className="cv-page" lang={previewLanguage}>
+            <div className="preview-template">
+                <label htmlFor="preview-template">{previewTranslations.templateLabel}</label>
+                <select
+                    id="preview-template"
+                    value={template}
+                    onChange={event => setTemplate(event.target.value)}
+                >
+                    <option value="classic">{previewTranslations.classicTemplate}</option>
+                    <option value="modern">{previewTranslations.modernTemplate}</option>
+                </select>
+            </div>
+            <div className={`cv-page cv-page--${template}`} lang={previewLanguage}>
                 {hasPersonalInfo && (
                     <header className="cv-header">
                         {personalInfo.profilePhoto && (
@@ -76,13 +88,17 @@ export default function Preview({
                                 alt="Profile"
                             />
                         )}
-                        {hasValue(personalInfo.fullName) && <h1>{personalInfo.fullName}</h1>}
-                        {hasValue(personalInfo.title) && <h2>{personalInfo.title}</h2>}
-                        {["email", "phone", "location", "linkedin", "website"].map(field =>
-                            hasValue(personalInfo[field]) && (
-                                <p key={field}>{personalInfo[field]}</p>
-                            )
-                        )}
+                        <div className="cv-header-content">
+                            {hasValue(personalInfo.fullName) && <h1>{personalInfo.fullName}</h1>}
+                            {hasValue(personalInfo.title) && <h2>{personalInfo.title}</h2>}
+                            <div className="cv-contact-details">
+                                {["email", "phone", "location", "linkedin", "website"].map(field =>
+                                    hasValue(personalInfo[field]) && (
+                                        <p key={field}>{personalInfo[field]}</p>
+                                    )
+                                )}
+                            </div>
+                        </div>
                     </header>
                 )}
 

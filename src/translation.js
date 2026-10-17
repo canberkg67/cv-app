@@ -77,6 +77,9 @@ export const translations = {
         },
         preview: {
             title: "Live Preview",
+            templateLabel: "Template",
+            classicTemplate: "Classic",
+            modernTemplate: "Modern",
             profileAlt: "Profile",
             about: "About",
             education: "Education",
@@ -208,6 +211,9 @@ export const translations = {
         },
         preview: {
             title: "Canlı Önizleme",
+            templateLabel: "Şablon",
+            classicTemplate: "Klasik",
+            modernTemplate: "Modern",
             profileAlt: "Profil",
             about: "Hakkımda",
             education: "Eğitim",
